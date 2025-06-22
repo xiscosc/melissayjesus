@@ -41,6 +41,12 @@
 	}
 
 	function scrollToSection(sectionId: string) {
+		// If we're not on the home page, navigate there first
+		if (window.location.pathname !== '/') {
+			window.location.href = `/#${sectionId}`;
+			return;
+		}
+
 		const element = document.getElementById(sectionId);
 		if (element) {
 			element.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -57,7 +63,7 @@
 		? 'py-2'
 		: 'py-4'}"
 >
-	<div class="mx-auto max-w-7xl px-6">
+	<div class="mx-auto max-w-7xl px-4 md:px-6">
 		<nav
 			class="relative rounded-lg border-2 border-[#212E21] bg-[#869782] px-6 py-3 shadow-lg transition-all duration-500 ease-out"
 		>
