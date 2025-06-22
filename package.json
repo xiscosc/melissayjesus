@@ -40,5 +40,8 @@
 		"onlyBuiltDependencies": [
 			"esbuild"
 		]
+	},
+	"dependencies": {
+		"world-countries": "^5.1.0"
 	}
 }

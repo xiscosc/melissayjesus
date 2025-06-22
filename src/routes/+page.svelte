@@ -2,7 +2,15 @@
 	import homeImage from '$lib/assets/home2.jpg?enhanced';
 	import presentGif from '$lib/assets/algo-de-postre-no-que-se-nos-v.gif';
 	import weddingRings from '$lib/assets/noun-wedding-rings-57138.svg';
-	import { Button, Card, DetailCard, IconBox, TimelineItem, Section } from '$lib/components';
+	import {
+		Button,
+		Card,
+		DetailCard,
+		IconBox,
+		TimelineItem,
+		Section,
+		CountrySelect
+	} from '$lib/components';
 </script>
 
 <svelte:head>
@@ -411,11 +419,14 @@
 			<form class="space-y-6">
 				<div>
 					<label class="mb-2 block text-sm font-bold text-[#212E21]">Número de Teléfono</label>
-					<input
-						type="tel"
-						class="w-full rounded-md border-2 border-[#212E21] px-4 py-3 focus:border-[#751F19] focus:ring-2 focus:ring-[#751F19]"
-						placeholder="+34 123 456 789"
-					/>
+					<div class="flex gap-2">
+						<CountrySelect />
+						<input
+							type="tel"
+							class="flex-1 rounded-md border-2 border-[#212E21] px-4 py-3 focus:border-[#751F19] focus:ring-2 focus:ring-[#751F19]"
+							placeholder="123 456 789"
+						/>
+					</div>
 				</div>
 
 				<Button type="submit" class="w-full">Continuar</Button>
