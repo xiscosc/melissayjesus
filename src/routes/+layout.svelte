@@ -59,11 +59,13 @@
 >
 	<div class="mx-auto max-w-7xl px-6">
 		<nav
-			class="relative cursor-pointer rounded-lg border-2 border-[#212E21] bg-[#869782] px-6 py-3 shadow-lg transition-all duration-500 ease-out"
-			onclick={toggleMobileMenu}
+			class="relative rounded-lg border-2 border-[#212E21] bg-[#869782] px-6 py-3 shadow-lg transition-all duration-500 ease-out"
 		>
 			<div class="flex items-center justify-between">
-				<div class="font-sans text-2xl font-black tracking-tight text-[#212E21] md:hidden">
+				<div
+					class="cursor-pointer font-sans text-2xl font-black tracking-tight text-[#212E21] md:hidden"
+					onclick={toggleMobileMenu}
+				>
 					Menú
 				</div>
 
@@ -98,7 +100,7 @@
 					</svg>
 				</div>
 
-				<div class="hidden items-center space-x-1 md:flex" onclick={(e) => e.stopPropagation()}>
+				<div class="hidden items-center space-x-1 md:flex">
 					<button
 						onclick={() => scrollToSection('home')}
 						class="relative rounded-md px-4 py-2 font-sans text-sm font-bold tracking-wide text-[#212E21] transition-all duration-300 hover:bg-[#212E21]/10 hover:text-[#212E21]"
@@ -121,7 +123,7 @@
 						onclick={() => scrollToSection('present')}
 						class="relative rounded-md px-4 py-2 font-sans text-sm font-bold tracking-wide text-[#212E21] transition-all duration-300 hover:bg-[#212E21]/10 hover:text-[#212E21]"
 					>
-						Regalos
+						Crowdfunding
 					</button>
 					<button
 						onclick={() => scrollToSection('event')}
@@ -213,7 +215,7 @@
 							onclick={() => scrollToSection('present')}
 							class="block w-full rounded-md px-4 py-3 text-left font-sans text-base font-bold tracking-wide text-[#212E21] transition-colors duration-200 hover:bg-[#212E21]/10"
 						>
-							Regalos
+							Crowdfunding
 						</button>
 						<button
 							onclick={() => scrollToSection('event')}

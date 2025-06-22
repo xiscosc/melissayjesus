@@ -1,5 +1,7 @@
 <script lang="ts">
 	import homeImage from '$lib/assets/home2.jpg?enhanced';
+	import presentGif from '$lib/assets/algo-de-postre-no-que-se-nos-v.gif';
+	import weddingRings from '$lib/assets/noun-wedding-rings-57138.svg';
 </script>
 
 <svelte:head>
@@ -24,10 +26,19 @@
 		<h1 class="animate-fade-in mb-8 text-5xl font-black tracking-tight md:text-7xl">
 			MELISSA & JESÚS
 		</h1>
-		<p class="mb-6 text-2xl font-light tracking-wide opacity-90 md:text-3xl">OLGA PARA SIEMPRE</p>
+		<p
+			class="mb-6 flex items-baseline justify-center gap-3 text-2xl font-light tracking-wide opacity-90 md:text-3xl"
+		>
+			<span>VIDA MÁRTIR FOREVER</span>
+			<img
+				src={weddingRings}
+				alt="Wedding rings"
+				class="h-8 w-8 flex-shrink-0 translate-y-3 opacity-90 invert md:h-10 md:w-10"
+			/>
+		</p>
 		<div class="mb-12 space-y-2">
 			<p class="text-sm font-bold tracking-widest uppercase opacity-80 md:text-base">
-				Reserva la Fecha
+				Save the date
 			</p>
 			<p class="text-3xl font-black tracking-tight md:text-4xl">13 de Diciembre de 2025</p>
 		</div>
@@ -293,97 +304,26 @@
 <!-- Present Section -->
 <section id="present" class="bg-white/50 py-24">
 	<div class="container mx-auto px-6">
-		<div class="mx-auto max-w-6xl">
-			<div class="mb-20 text-center">
-				<h2 class="mb-6 text-4xl font-black tracking-tight text-[#212E21] md:text-6xl">Regalos</h2>
-				<p class="mx-auto max-w-3xl text-xl font-light text-[#6A7B67]">
-					Tu presencia es el regalo más importante, pero si deseas obsequiarnos algo...
+		<div class="mx-auto max-w-4xl">
+			<div class="mb-16 text-center">
+				<h2 class="mb-6 text-4xl font-black tracking-tight text-[#212E21] md:text-6xl">
+					Crowdfunding
+				</h2>
+				<p class="mx-auto mb-4 max-w-2xl text-2xl font-medium text-[#212E21]">
+					Una ayudita para el postre?
+				</p>
+				<p class="mx-auto mb-8 max-w-2xl text-xl font-light text-[#6A7B67]">
+					DE75512108001245126199
 				</p>
 			</div>
 
-			<div class="grid gap-8 md:grid-cols-3 lg:gap-12">
-				<div class="group">
-					<div
-						class="transform rounded-lg border-2 border-[#212E21] bg-[#E8DEC9] p-8 text-center transition-all duration-500 hover:-translate-y-1 hover:shadow-lg"
-					>
-						<div
-							class="mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-lg border-2 border-[#212E21] bg-[#751F19] shadow-md"
-						>
-							<svg class="h-10 w-10 text-[#E8DEC9]" fill="currentColor" viewBox="0 0 20 20">
-								<path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
-								<path
-									fill-rule="evenodd"
-									d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"
-									clip-rule="evenodd"
-								/>
-							</svg>
-						</div>
-						<h3 class="mb-6 text-2xl font-bold text-[#212E21] md:text-3xl">
-							Contribución Monetaria
-						</h3>
-						<div class="space-y-4">
-							<p class="text-[#6A7B67]">Para ayudarnos a comenzar nuestra nueva vida juntos</p>
-							<div class="rounded-lg bg-white/80 p-4">
-								<p class="font-bold text-[#212E21]">Datos bancarios próximamente</p>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="group">
-					<div
-						class="transform rounded-lg border-2 border-[#212E21] bg-[#E8DEC9] p-8 text-center transition-all duration-500 hover:-translate-y-1 hover:shadow-lg"
-					>
-						<div
-							class="mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-lg border-2 border-[#212E21] bg-[#751F19] shadow-md"
-						>
-							<svg class="h-10 w-10 text-[#E8DEC9]" fill="currentColor" viewBox="0 0 20 20">
-								<path
-									d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"
-								/>
-							</svg>
-						</div>
-						<h3 class="mb-6 text-2xl font-bold text-[#212E21] md:text-3xl">Lista de Regalos</h3>
-						<div class="space-y-4">
-							<p class="text-[#6A7B67]">Artículos específicos que nos ayudarán en nuestro hogar</p>
-							<button
-								class="inline-flex items-center font-bold text-[#212E21] transition-colors duration-200 hover:text-[#751F19]"
-							>
-								Ver Lista
-								<svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-									<path
-										stroke-linecap="round"
-										stroke-linejoin="round"
-										stroke-width="2"
-										d="M9 5l7 7-7 7"
-									/>
-								</svg>
-							</button>
-						</div>
-					</div>
-				</div>
-
-				<div class="group">
-					<div
-						class="transform rounded-lg border-2 border-[#212E21] bg-[#E8DEC9] p-8 text-center transition-all duration-500 hover:-translate-y-1 hover:shadow-lg"
-					>
-						<div
-							class="mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-lg border-2 border-[#212E21] bg-[#751F19] shadow-md"
-						>
-							<svg class="h-10 w-10 text-[#E8DEC9]" fill="currentColor" viewBox="0 0 20 20">
-								<path
-									fill-rule="evenodd"
-									d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-									clip-rule="evenodd"
-								/>
-							</svg>
-						</div>
-						<h3 class="mb-6 text-2xl font-bold text-[#212E21] md:text-3xl">Solo Tu Presencia</h3>
-						<div class="space-y-4">
-							<p class="text-[#6A7B67]">Lo más importante es que estés ahí con nosotros</p>
-							<p class="text-lg font-bold text-[#212E21]">¡Tu compañía es el mejor regalo!</p>
-						</div>
-					</div>
+			<div class="flex justify-center">
+				<div class="rounded-lg border-2 border-[#212E21] bg-[#E8DEC9] p-8 shadow-lg">
+					<img
+						src={presentGif}
+						alt="Una ayudita pa'l postre"
+						class="mx-auto h-auto max-w-full rounded-lg"
+					/>
 				</div>
 			</div>
 		</div>
@@ -668,7 +608,7 @@
 				<button
 					class="inline-flex items-center justify-center rounded-lg border-2 border-[#E8DEC9] px-8 py-5 text-lg font-bold text-[#E8DEC9] transition-all duration-300 hover:bg-[#E8DEC9] hover:text-[#212E21]"
 				>
-					Reservar la Fecha
+					Save the date
 				</button>
 			</div>
 
