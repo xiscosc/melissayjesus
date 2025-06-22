@@ -1,0 +1,40 @@
+@import 'tailwindcss';
+
+@font-face {
+	font-family: 'Panamera';
+	src: url('./lib/assets/Panamera-Medium-BF656d4580635d7.otf') format('opentype');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'PragmaticaExtended';
+	src: url('./lib/assets/PragmaticaExtendedBold.otf') format('opentype');
+	font-weight: bold;
+	font-style: normal;
+	font-display: swap;
+}
+
+* {
+	font-family:
+		'Panamera',
+		system-ui,
+		-apple-system,
+		sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family:
+		'PragmaticaExtended',
+		'Panamera',
+		system-ui,
+		-apple-system,
+		sans-serif;
+	font-weight: bold;
+}
