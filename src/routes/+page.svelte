@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import homeImage from '$lib/assets/home2.jpg?enhanced';
 	import presentGif from '$lib/assets/algo-de-postre-no-que-se-nos-v.gif';
 	import weddingRings from '$lib/assets/noun-wedding-rings-57138.svg';
@@ -11,6 +12,20 @@
 		Section,
 		CountrySelect
 	} from '$lib/components';
+
+	let countryCode = '+34';
+	let phoneNumber = '';
+
+	function handlePhoneSubmit(event: Event) {
+		event.preventDefault();
+
+		if (!phoneNumber.trim()) {
+			return;
+		}
+
+		const completePhone = countryCode + phoneNumber.trim();
+		goto(`/rsvp?phone=${encodeURIComponent(completePhone)}`);
+	}
 </script>
 
 <svelte:head>
@@ -28,7 +43,7 @@
 	/>
 
 	<!-- Overlay -->
-	<div class="absolute inset-0 bg-black/40"></div>
+	<div class="absolute inset-0 bg-gray-900/20"></div>
 
 	<!-- Hero Content -->
 	<div class="relative z-10 mx-auto max-w-5xl px-4 text-center text-white md:max-w-4xl md:px-6">
@@ -36,20 +51,20 @@
 			MELISSA & JESÚS
 		</h1>
 		<p
-			class="mb-6 flex items-baseline justify-center gap-3 text-2xl font-light tracking-wide opacity-90 md:text-3xl"
+			class="mb-6 flex items-baseline justify-center gap-3 text-2xl font-light tracking-wide md:text-3xl"
 		>
 			<span>VIDA MÁRTIR FOREVER</span>
 			<img
 				src={weddingRings}
 				alt="Wedding rings"
-				class="h-8 w-8 flex-shrink-0 translate-y-3 opacity-90 invert md:h-10 md:w-10"
+				class="h-8 w-8 flex-shrink-0 translate-y-3 invert md:h-10 md:w-10"
 			/>
 		</p>
 		<div class="mb-12 space-y-2">
-			<p class="text-sm font-bold tracking-widest uppercase opacity-80 md:text-base">
-				Save the date
+			<p class="text-sm font-bold tracking-widest uppercase md:text-base">Save the date</p>
+			<p class="text-3xl font-black tracking-tight uppercase md:text-4xl">
+				13 de Diciembre de 2025
 			</p>
-			<p class="text-3xl font-black tracking-tight md:text-4xl">13 de Diciembre de 2025</p>
 		</div>
 		<div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
 			<Button
@@ -416,15 +431,21 @@
 		</div>
 
 		<div class="rounded-lg border-2 border-[#212E21] bg-white/80 p-8">
-			<form class="space-y-6">
+			<form class="space-y-6" onsubmit={handlePhoneSubmit}>
 				<div>
-					<label class="mb-2 block text-sm font-bold text-[#212E21]">Número de Teléfono</label>
-					<div class="flex gap-2">
-						<CountrySelect />
+					<label for="phone" class="mb-2 block text-sm font-bold text-[#212E21]"
+						>Número de Teléfono *</label
+					>
+					<div class="flex items-stretch gap-2">
+						<div class="flex-shrink-0">
+							<CountrySelect bind:value={countryCode} />
+						</div>
 						<input
 							type="tel"
-							class="flex-1 rounded-md border-2 border-[#212E21] px-4 py-3 focus:border-[#751F19] focus:ring-2 focus:ring-[#751F19]"
+							bind:value={phoneNumber}
+							class="min-w-0 flex-1 rounded-md border-2 border-[#212E21] px-3 py-3 text-sm focus:border-[#751F19] focus:ring-2 focus:ring-[#751F19] sm:px-4 sm:text-base"
 							placeholder="123 456 789"
+							required
 						/>
 					</div>
 				</div>

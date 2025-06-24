@@ -1,5 +1,24 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import { Button, Section } from '$lib/components';
+	import { enhance } from '$app/forms';
+	import type { ActionData } from './$types';
+
+	export let form: ActionData;
+
+	let companion = 'no';
+	let transport = 'no';
+
+	// Get phone from URL parameter
+	$: phoneParam = $page.url.searchParams.get('phone') || '';
+
+	function handleRadioChange(name: string, value: string) {
+		if (name === 'companion') {
+			companion = value;
+		} else if (name === 'transport') {
+			transport = value;
+		}
+	}
 </script>
 
 <svelte:head>
@@ -20,170 +39,199 @@
 		</div>
 
 		<div class="rounded-lg border-2 border-[#212E21] bg-white/80 p-8 md:p-12">
-			<form class="space-y-6">
-				<div class="grid gap-6 md:grid-cols-2">
-					<div>
-						<label class="mb-2 block text-sm font-bold text-[#212E21]">Nombre</label>
-						<input
-							type="text"
-							class="w-full rounded-md border-2 border-[#212E21] px-4 py-3 focus:border-[#751F19] focus:ring-2 focus:ring-[#751F19]"
-							placeholder="Tu nombre"
-						/>
-					</div>
-					<div>
-						<label class="mb-2 block text-sm font-bold text-[#212E21]">Apellido</label>
-						<input
-							type="text"
-							class="w-full rounded-md border-2 border-[#212E21] px-4 py-3 focus:border-[#751F19] focus:ring-2 focus:ring-[#751F19]"
-							placeholder="Tu apellido"
-						/>
-					</div>
+			{#if form?.success}
+				<div class="text-center">
+					<div class="mb-8 text-6xl">💒</div>
+					<h2 class="mb-6 text-4xl font-black tracking-tight text-[#212E21] md:text-5xl">
+						¡Gracias {form.name}!
+					</h2>
+					<p class="mb-4 text-2xl font-bold text-[#751F19]">
+						{form.message}
+					</p>
+					<p class="text-xl font-light text-[#6A7B67]">Nos vemos en la boda</p>
 				</div>
+			{:else}
+				{#if form?.error}
+					<div class="mb-6 rounded-md border border-red-400 bg-red-100 p-4">
+						<p class="font-bold text-red-700">❌ {form.error}</p>
+					</div>
+				{/if}
 
-				<div class="grid gap-6 md:grid-cols-2">
+				<form method="POST" use:enhance class="space-y-6">
 					<div>
-						<label class="mb-2 block text-sm font-bold text-[#212E21]">Correo Electrónico</label>
+						<label class="mb-2 block text-sm font-bold text-[#212E21]">Nombre Completo</label>
 						<input
-							type="email"
-							class="w-full rounded-md border-2 border-[#212E21] px-4 py-3 focus:border-[#751F19] focus:ring-2 focus:ring-[#751F19]"
-							placeholder="tu.correo@ejemplo.com"
+							type="text"
+							name="name"
+							class="w-full rounded-md border-2 border-[#212E21] bg-white px-4 py-3 focus:border-[#751F19] focus:ring-2 focus:ring-[#751F19]"
+							placeholder="Tu nombre y apellidos"
+							autofocus
+							required
 						/>
 					</div>
+
 					<div>
 						<label class="mb-2 block text-sm font-bold text-[#212E21]">Teléfono</label>
 						<input
 							type="tel"
-							class="w-full rounded-md border-2 border-[#212E21] px-4 py-3 focus:border-[#751F19] focus:ring-2 focus:ring-[#751F19]"
+							name="phone"
+							value={phoneParam}
+							class="w-full rounded-md border-2 border-[#212E21] bg-white px-4 py-3 focus:border-[#751F19] focus:ring-2 focus:ring-[#751F19]"
 							placeholder="+34 123 456 789"
+							required
 						/>
 					</div>
-				</div>
 
-				<div>
-					<label class="mb-4 block text-sm font-bold text-[#212E21]">¿Asistirás?</label>
-					<div class="grid gap-4 md:grid-cols-2">
-						<label
-							class="flex cursor-pointer items-center rounded-md border-2 border-[#212E21] bg-white p-4 transition-colors hover:border-[#751F19]"
-						>
-							<input type="radio" name="attending" value="yes" class="sr-only" />
-							<div
-								class="mr-3 flex h-5 w-5 items-center justify-center rounded-full border-2 border-[#751F19]"
+					<div>
+						<label class="mb-4 block text-sm font-bold text-[#212E21]">Acompañante</label>
+						<div class="grid gap-4 md:grid-cols-2">
+							<label
+								for="companion"
+								class="flex cursor-pointer items-center rounded-md border-2 border-[#212E21] bg-white p-4 transition-colors hover:border-[#751F19]"
+								on:click={() => handleRadioChange('companion', 'yes')}
 							>
-								<div class="h-2 w-2 rounded-full bg-[#751F19] opacity-0"></div>
-							</div>
-							<span class="font-bold text-[#212E21]">✅ ¡Sí, estaré ahí!</span>
-						</label>
-						<label
-							class="flex cursor-pointer items-center rounded-md border-2 border-[#212E21] bg-white p-4 transition-colors hover:border-red-500"
-						>
-							<input type="radio" name="attending" value="no" class="sr-only" />
-							<div
-								class="mr-3 flex h-5 w-5 items-center justify-center rounded-full border-2 border-red-500"
+								<input
+									type="radio"
+									name="companion"
+									value="yes"
+									class="sr-only"
+									bind:group={companion}
+									required
+								/>
+								<div
+									class="mr-3 flex h-5 w-5 items-center justify-center rounded-full border-2 border-[#751F19]"
+								>
+									<div
+										class="h-2 w-2 rounded-full bg-[#751F19] transition-opacity {companion === 'yes'
+											? 'opacity-100'
+											: 'opacity-0'}"
+									></div>
+								</div>
+								<span class="font-bold text-[#212E21]">👫 Vendré con acompañante</span>
+							</label>
+							<label
+								class="flex cursor-pointer items-center rounded-md border-2 border-[#212E21] bg-white p-4 transition-colors hover:border-[#751F19]"
+								on:click={() => handleRadioChange('companion', 'no')}
 							>
-								<div class="h-2 w-2 rounded-full bg-red-500 opacity-0"></div>
-							</div>
-							<span class="font-bold text-[#212E21]">❌ Lo siento, no podré asistir</span>
-						</label>
+								<input
+									type="radio"
+									name="companion"
+									value="no"
+									class="sr-only"
+									bind:group={companion}
+									required
+								/>
+								<div
+									class="mr-3 flex h-5 w-5 items-center justify-center rounded-full border-2 border-[#751F19]"
+								>
+									<div
+										class="h-2 w-2 rounded-full bg-[#751F19] transition-opacity {companion === 'no'
+											? 'opacity-100'
+											: 'opacity-0'}"
+									></div>
+								</div>
+								<span class="font-bold text-[#212E21]">🙋‍♂️ Vendré solo/a</span>
+							</label>
+						</div>
 					</div>
-				</div>
 
-				<div>
-					<label class="mb-2 block text-sm font-bold text-[#212E21]">Número de Invitados</label>
-					<select
-						class="w-full rounded-md border-2 border-[#212E21] px-4 py-3 focus:border-[#751F19] focus:ring-2 focus:ring-[#751F19]"
-					>
-						<option>Solo yo</option>
-						<option>2 personas</option>
-						<option>3 personas</option>
-						<option>4 personas</option>
-						<option>5+ personas</option>
-					</select>
-				</div>
-
-				<div>
-					<label class="mb-2 block text-sm font-bold text-[#212E21]">
-						¿Necesitas transporte organizado?
-					</label>
-					<div class="grid gap-4 md:grid-cols-2">
-						<label
-							class="flex cursor-pointer items-center rounded-md border-2 border-[#212E21] bg-white p-4 transition-colors hover:border-[#751F19]"
-						>
-							<input type="radio" name="transport" value="yes" class="sr-only" />
-							<div
-								class="mr-3 flex h-5 w-5 items-center justify-center rounded-full border-2 border-[#751F19]"
+					{#if companion === 'yes'}
+						<div>
+							<label for="companionName" class="mb-2 block text-sm font-bold text-[#212E21]"
+								>Nombre del Acompañante</label
 							>
-								<div class="h-2 w-2 rounded-full bg-[#751F19] opacity-0"></div>
-							</div>
-							<span class="font-bold text-[#212E21]">🚌 Sí, necesito transporte</span>
-						</label>
-						<label
-							class="flex cursor-pointer items-center rounded-md border-2 border-[#212E21] bg-white p-4 transition-colors hover:border-[#751F19]"
-						>
-							<input type="radio" name="transport" value="no" class="sr-only" />
-							<div
-								class="mr-3 flex h-5 w-5 items-center justify-center rounded-full border-2 border-[#751F19]"
+							<input
+								type="text"
+								name="companionName"
+								class="w-full rounded-md border-2 border-[#212E21] bg-white px-4 py-3 focus:border-[#751F19] focus:ring-2 focus:ring-[#751F19]"
+								placeholder="Nombre y apellidos de tu acompañante"
+								required
+							/>
+						</div>
+					{/if}
+
+					<div>
+						<label class="mb-2 block text-sm font-bold text-[#212E21]"> Bus (desde Palma) </label>
+						<div class="grid gap-4 md:grid-cols-2">
+							<label
+								class="flex cursor-pointer items-center rounded-md border-2 border-[#212E21] bg-white p-4 transition-colors hover:border-[#751F19]"
+								on:click={() => handleRadioChange('transport', 'yes')}
 							>
-								<div class="h-2 w-2 rounded-full bg-[#751F19] opacity-0"></div>
-							</div>
-							<span class="font-bold text-[#212E21]">🚗 Iré por mi cuenta</span>
-						</label>
+								<input
+									type="radio"
+									name="transport"
+									value="yes"
+									class="sr-only"
+									bind:group={transport}
+									required
+								/>
+								<div
+									class="mr-3 flex h-5 w-5 items-center justify-center rounded-full border-2 border-[#751F19]"
+								>
+									<div
+										class="h-2 w-2 rounded-full bg-[#751F19] transition-opacity {transport === 'yes'
+											? 'opacity-100'
+											: 'opacity-0'}"
+									></div>
+								</div>
+								<span class="font-bold text-[#212E21]">🚌 Sí, vengo en bus</span>
+							</label>
+							<label
+								class="flex cursor-pointer items-center rounded-md border-2 border-[#212E21] bg-white p-4 transition-colors hover:border-[#751F19]"
+								on:click={() => handleRadioChange('transport', 'no')}
+							>
+								<input
+									type="radio"
+									name="transport"
+									value="no"
+									class="sr-only"
+									bind:group={transport}
+									required
+								/>
+								<div
+									class="mr-3 flex h-5 w-5 items-center justify-center rounded-full border-2 border-[#751F19]"
+								>
+									<div
+										class="h-2 w-2 rounded-full bg-[#751F19] transition-opacity {transport === 'no'
+											? 'opacity-100'
+											: 'opacity-0'}"
+									></div>
+								</div>
+								<span class="font-bold text-[#212E21]">🚗 No, voy por mi cuenta</span>
+							</label>
+						</div>
 					</div>
-				</div>
 
-				<div>
-					<label class="mb-2 block text-sm font-bold text-[#212E21]">
-						Restricciones Alimentarias
-					</label>
-					<div class="grid gap-2 md:grid-cols-3">
-						<label class="flex cursor-pointer items-center">
-							<input type="checkbox" class="mr-2 rounded border-[#212E21]" />
-							<span class="text-[#212E21]">Vegetariano</span>
+					<div>
+						<label class="mb-2 block text-sm font-bold text-[#212E21]">
+							Restricciones Alimentarias
 						</label>
-						<label class="flex cursor-pointer items-center">
-							<input type="checkbox" class="mr-2 rounded border-[#212E21]" />
-							<span class="text-[#212E21]">Vegano</span>
-						</label>
-						<label class="flex cursor-pointer items-center">
-							<input type="checkbox" class="mr-2 rounded border-[#212E21]" />
-							<span class="text-[#212E21]">Sin Gluten</span>
-						</label>
-						<label class="flex cursor-pointer items-center">
-							<input type="checkbox" class="mr-2 rounded border-[#212E21]" />
-							<span class="text-[#212E21]">Sin Lactosa</span>
-						</label>
-						<label class="flex cursor-pointer items-center">
-							<input type="checkbox" class="mr-2 rounded border-[#212E21]" />
-							<span class="text-[#212E21]">Alérgico a Frutos Secos</span>
-						</label>
-						<label class="flex cursor-pointer items-center">
-							<input type="checkbox" class="mr-2 rounded border-[#212E21]" />
-							<span class="text-[#212E21]">Otro</span>
-						</label>
+						<input
+							type="text"
+							name="dietaryRestrictions"
+							class="w-full rounded-md border-2 border-[#212E21] bg-white px-4 py-3 focus:border-[#751F19] focus:ring-2 focus:ring-[#751F19]"
+							placeholder="Ej: vegetariano, sin gluten, alérgico a frutos secos..."
+						/>
 					</div>
-				</div>
 
-				<div>
-					<label class="mb-2 block text-sm font-bold text-[#212E21]">
-						Mensaje Especial (Opcional)
-					</label>
-					<textarea
-						rows="4"
-						class="w-full rounded-md border-2 border-[#212E21] px-4 py-3 focus:border-[#751F19] focus:ring-2 focus:ring-[#751F19]"
-						placeholder="Comparte un mensaje, otras restricciones alimentarias, o cualquier cosa que debamos saber..."
-					></textarea>
-				</div>
+					<div>
+						<label class="mb-2 block text-sm font-bold text-[#212E21]" for="song">
+							Una canción que te recuerde a nosotros
+						</label>
+						<input
+							type="text"
+							name="song"
+							class="w-full rounded-md border-2 border-[#212E21] bg-white px-4 py-3 focus:border-[#751F19] focus:ring-2 focus:ring-[#751F19]"
+							placeholder="Nombre de la canción y artista"
+							required
+						/>
+					</div>
 
-				<div class="flex flex-col gap-4 sm:flex-row">
-					<Button type="submit" class="flex-1">Enviar Confirmación ✨</Button>
-					<Button
-						variant="outline"
-						onclick={() => (window.location.href = '/')}
-						class="border-[#212E21] text-[#212E21] hover:bg-[#212E21] hover:text-white"
-					>
-						Volver al Inicio
-					</Button>
-				</div>
-			</form>
+					<div>
+						<Button type="submit" class="w-full">Enviar Confirmación ✨</Button>
+					</div>
+				</form>
+			{/if}
 		</div>
 	</div>
 </Section>
