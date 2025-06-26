@@ -10,7 +10,9 @@
 		IconBox,
 		TimelineItem,
 		Section,
-		CountrySelect
+		CountrySelect,
+		Map,
+		ClickableImage
 	} from '$lib/components';
 
 	let countryCode = '+34';
@@ -138,85 +140,188 @@
 	</div>
 </Section>
 
-<!-- Wedding Details Section -->
-<Section variant="white">
+<!-- Event Details Section -->
+<Section id="event" variant="white">
 	<div class="mx-auto max-w-7xl">
 		<div class="mb-20 text-center">
-			<h2 class="mb-6 text-4xl font-black tracking-tight text-[#212E21] md:text-6xl">
-				Detalles de la Boda
-			</h2>
+			<h2 class="mb-6 text-4xl font-black tracking-tight text-[#212E21] md:text-6xl">La Boda</h2>
 			<p class="mx-auto max-w-2xl text-xl font-light text-[#6A7B67]">
 				Toda la información importante para nuestro día especial
 			</p>
 		</div>
 
-		<div class="grid gap-8 md:grid-cols-3 lg:gap-12">
-			<!-- Ceremony -->
+		<div class="mb-20 grid gap-8 md:grid-cols-3 lg:gap-12">
+			<!-- When -->
 			<DetailCard>
-				<IconBox class="mx-auto">
-					<svg class="h-10 w-10 text-[#E8DEC9]" fill="currentColor" viewBox="0 0 20 20">
-						<path
-							fill-rule="evenodd"
-							d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-							clip-rule="evenodd"
-						/>
-					</svg>
-				</IconBox>
-				<h3 class="mb-6 text-2xl font-bold text-[#212E21] md:text-3xl">Ceremonia</h3>
+				<div
+					class="mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-lg border-2 border-[#212E21] bg-[#751F19] text-4xl"
+				>
+					📅
+				</div>
+				<h3 class="mb-6 text-2xl font-bold text-[#212E21] md:text-3xl">Cuando</h3>
 				<div class="space-y-2">
-					<p class="text-lg font-bold text-[#212E21]">Fecha Próximamente</p>
-					<p class="text-[#6A7B67]">Hora por Confirmar</p>
+					<p class="text-lg font-bold text-[#212E21]">13 de Diciembre</p>
+					<p class="text-[#6A7B67]">Hora por confirmar</p>
 				</div>
 			</DetailCard>
 
-			<!-- Reception -->
+			<!-- Where -->
 			<DetailCard>
-				<IconBox class="mx-auto">
-					<svg class="h-10 w-10 text-[#E8DEC9]" fill="currentColor" viewBox="0 0 20 20">
-						<path
-							d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"
-						/>
-					</svg>
-				</IconBox>
-				<h3 class="mb-6 text-2xl font-bold text-[#212E21] md:text-3xl">Recepción</h3>
-				<div class="space-y-2">
-					<p class="text-lg font-bold text-[#212E21]">Después de la Ceremonia</p>
-					<p class="text-[#6A7B67]">Cena y Baile</p>
+				<div
+					class="mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-lg border-2 border-[#212E21] bg-[#751F19] text-4xl"
+				>
+					📍
 				</div>
-			</DetailCard>
-
-			<!-- Location -->
-			<DetailCard>
-				<IconBox class="mx-auto">
-					<svg class="h-10 w-10 text-[#E8DEC9]" fill="currentColor" viewBox="0 0 20 20">
-						<path
-							fill-rule="evenodd"
-							d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-							clip-rule="evenodd"
-						/>
-					</svg>
-				</IconBox>
-				<h3 class="mb-6 text-2xl font-bold text-[#212E21] md:text-3xl">Lugar</h3>
+				<h3 class="mb-6 text-2xl font-bold text-[#212E21] md:text-3xl">Dónde</h3>
 				<div class="space-y-2">
-					<p class="text-lg font-bold text-[#212E21]">Detalles del Lugar</p>
+					<p class="text-lg font-bold text-[#212E21]">Frontón Sineu</p>
 					<button
 						onclick={() => document.getElementById('venue')?.scrollIntoView({ behavior: 'smooth' })}
 						class="inline-flex items-center font-bold text-[#6A7B67] transition-colors duration-200 hover:text-[#212E21]"
 					>
 						Ver Detalles
-						<svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"
-							></path>
-						</svg>
+						<span class="ml-1">→</span>
+					</button>
+				</div>
+			</DetailCard>
+
+			<!-- How -->
+			<DetailCard>
+				<div
+					class="mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-lg border-2 border-[#212E21] bg-[#751F19] text-4xl"
+				>
+					🚌
+				</div>
+				<h3 class="mb-6 text-2xl font-bold text-[#212E21] md:text-3xl">Cómo</h3>
+				<div class="space-y-2">
+					<p class="text-lg font-bold text-[#212E21]">Transporte</p>
+					<button
+						onclick={() =>
+							document.getElementById('transport')?.scrollIntoView({ behavior: 'smooth' })}
+						class="inline-flex items-center font-bold text-[#6A7B67] transition-colors duration-200 hover:text-[#212E21]"
+					>
+						Ver Detalles
+						<span class="ml-1">→</span>
 					</button>
 				</div>
 			</DetailCard>
 		</div>
+
+		<!-- Timeline Section -->
+		<div class="mx-auto max-w-4xl">
+			<div class="space-y-8">
+				<TimelineItem time="? PM" title="Ceremonia" description="Más detalles próximamente" />
+
+				<TimelineItem time="? PM" title="Cóctel" description="Más detalles próximamente" />
+
+				<TimelineItem time="? PM" title="Cena" description="Más detalles próximamente" />
+
+				<TimelineItem time="? PM" title="Fiesta" description="Más detalles próximamente" />
+			</div>
+		</div>
 	</div>
 </Section>
 
+<!-- Venue Section -->
+<section id="venue" class="bg-[#E8DEC9] py-24">
+	<div class="container mx-auto px-6">
+		<div class="mx-auto max-w-6xl">
+			<div class="mb-20 text-center">
+				<h2 class="mb-6 text-4xl font-black tracking-tight text-[#212E21] md:text-6xl">
+					Frontón Sineu
+				</h2>
+				<p class="mx-auto max-w-3xl text-xl font-light text-[#6A7B67]">
+					Donde celebraremos nuestra boda
+				</p>
+			</div>
+
+			<div class="grid gap-8 lg:grid-cols-2">
+				<!-- Photos Section -->
+				<div class="space-y-6">
+					<!-- Interior Photo -->
+					<div class="rounded-lg border-2 border-[#212E21] bg-white/80 p-2">
+						<div class="overflow-hidden rounded-lg">
+							<ClickableImage
+								src="https://images.squarespace-cdn.com/content/v1/667d006d47cdcd35aae21833/7f5e7754-4863-43fb-aff5-63e96770de71/1677620004607.jpg?format=1500w"
+								alt="Frontón Sineu interior"
+								className="h-64 w-full object-cover"
+							/>
+						</div>
+					</div>
+
+					<!-- Aerial Photo -->
+					<div class="rounded-lg border-2 border-[#212E21] bg-white/80 p-2">
+						<div class="overflow-hidden rounded-lg">
+							<ClickableImage
+								src="https://images.squarespace-cdn.com/content/v1/667d006d47cdcd35aae21833/135f8b3f-0327-493c-9076-1527a4a99633/DJI_0129.JPG"
+								alt="Frontón Sineu aerial view"
+								className="h-64 w-full object-cover"
+							/>
+						</div>
+					</div>
+
+					<!-- Third Photo -->
+					<div class="rounded-lg border-2 border-[#212E21] bg-white/80 p-2">
+						<div class="overflow-hidden rounded-lg">
+							<ClickableImage
+								src="https://images.squarespace-cdn.com/content/v1/667d006d47cdcd35aae21833/b3508353-261b-40c3-8862-6d949c09edcd/19.jpg"
+								alt="Frontón Sineu venue"
+								className="h-64 w-full object-cover"
+							/>
+						</div>
+					</div>
+				</div>
+
+				<!-- Directions & Map Section -->
+				<div class="space-y-8">
+					<!-- Directions -->
+					<div class="rounded-lg border-2 border-[#212E21] bg-white/80 p-8">
+						<h3 class="mb-6 text-2xl font-bold text-[#212E21] md:text-3xl">Dirección</h3>
+						<div class="space-y-6">
+							<p class="text-lg text-[#6A7B67]">📍 Carrer Frontó, 16, 07510 Sineu</p>
+							<div class="flex flex-col gap-3 sm:flex-row">
+								<a
+									href="https://maps.google.com/?q=39.6434045,3.0070244"
+									target="_blank"
+									rel="noopener noreferrer"
+									class="flex items-center justify-center gap-2 rounded-lg border-2 border-[#212E21] bg-[#751F19] px-4 py-3 text-sm font-bold text-[#E8DEC9] transition-all duration-300 hover:bg-[#212E21] sm:flex-1"
+								>
+									<img
+										src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg"
+										alt="Google"
+										class="h-5 w-5"
+									/>
+									Google Maps
+								</a>
+								<a
+									href="https://maps.apple.com/?q=39.6434045,3.0070244"
+									target="_blank"
+									rel="noopener noreferrer"
+									class="flex items-center justify-center gap-2 rounded-lg border-2 border-[#212E21] bg-white px-4 py-3 text-sm font-bold text-[#212E21] transition-all duration-300 hover:bg-[#212E21] hover:text-[#E8DEC9] sm:flex-1"
+								>
+									<img
+										src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg"
+										alt="Apple"
+										class="h-5 w-5"
+									/>
+									Apple Maps
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<!-- Map -->
+					<div class="h-96">
+						<Map />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
 <!-- Transport Section -->
-<section id="transport" class="bg-[#E8DEC9] py-24">
+<section id="transport" class="bg-white/50 py-24">
 	<div class="container mx-auto px-6">
 		<div class="mx-auto max-w-6xl">
 			<div class="mb-20 text-center">
@@ -224,7 +329,7 @@
 					Transporte
 				</h2>
 				<p class="mx-auto max-w-3xl text-xl font-light text-[#6A7B67]">
-					Información sobre cómo llegar y opciones de transporte para nuestro día especial
+					Te ayudamos a llegar a nuestra boda
 				</p>
 			</div>
 
@@ -234,25 +339,16 @@
 						class="transform rounded-lg border-2 border-[#212E21] bg-white/80 p-8 transition-all duration-500 hover:-translate-y-1"
 					>
 						<div
-							class="mb-8 flex h-20 w-20 items-center justify-center rounded-lg border-2 border-[#212E21] bg-[#751F19]"
+							class="mb-8 flex h-20 w-20 items-center justify-center rounded-lg border-2 border-[#212E21] bg-[#751F19] text-4xl"
 						>
-							<svg class="h-10 w-10 text-[#E8DEC9]" fill="currentColor" viewBox="0 0 20 20">
-								<path
-									d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"
-								/>
-								<path
-									d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1V8a1 1 0 00-1-1h-3z"
-								/>
-							</svg>
+							🚌
 						</div>
-						<h3 class="mb-4 text-2xl font-bold text-[#212E21] md:text-3xl">
-							Transporte Organizado
-						</h3>
+						<h3 class="mb-4 text-2xl font-bold text-[#212E21] md:text-3xl">Autocar</h3>
 						<div class="space-y-4 text-lg text-[#6A7B67]">
-							<p>🚌 Autobús desde el centro de la ciudad</p>
-							<p><strong>Salida:</strong> 2:00 PM desde Plaza Principal</p>
-							<p><strong>Regreso:</strong> 11:00 PM al mismo punto</p>
-							<p class="text-sm italic">Confirma tu lugar en el RSVP</p>
+							<p>📍 Desde Palma</p>
+							<p><strong>Salida:</strong> Próximamente</p>
+							<p><strong>Vuelta:</strong> Próximamente</p>
+							<p class="text-sm italic">Confirmanos si vienes con el autocar</p>
 						</div>
 					</div>
 				</div>
@@ -262,22 +358,14 @@
 						class="transform rounded-lg border-2 border-[#212E21] bg-white/80 p-8 transition-all duration-500 hover:-translate-y-1"
 					>
 						<div
-							class="mb-8 flex h-20 w-20 items-center justify-center rounded-lg border-2 border-[#212E21] bg-[#751F19]"
+							class="mb-8 flex h-20 w-20 items-center justify-center rounded-lg border-2 border-[#212E21] bg-[#751F19] text-4xl"
 						>
-							<svg class="h-10 w-10 text-[#E8DEC9]" fill="currentColor" viewBox="0 0 20 20">
-								<path
-									fill-rule="evenodd"
-									d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-									clip-rule="evenodd"
-								/>
-							</svg>
+							🚙
 						</div>
-						<h3 class="mb-4 text-2xl font-bold text-[#212E21] md:text-3xl">Transporte Propio</h3>
+						<h3 class="mb-4 text-2xl font-bold text-[#212E21] md:text-3xl">Coche</h3>
 						<div class="space-y-4 text-lg text-[#6A7B67]">
-							<p>🚗 Estacionamiento disponible en el lugar</p>
-							<p><strong>Dirección:</strong> A confirmar próximamente</p>
-							<p><strong>Parking:</strong> Gratuito para invitados</p>
-							<p class="text-sm italic">Recomendamos designar conductor</p>
+							<p>🅿️ Párking</p>
+							<p><strong>Dirección:</strong> Próximamente</p>
 						</div>
 					</div>
 				</div>
@@ -287,7 +375,7 @@
 </section>
 
 <!-- Present Section -->
-<section id="present" class="bg-white/50 py-24">
+<section id="present" class="bg-[#E8DEC9] py-24">
 	<div class="container mx-auto px-6">
 		<div class="mx-auto max-w-4xl">
 			<div class="mb-16 text-center">
@@ -295,7 +383,7 @@
 					Crowdfunding
 				</h2>
 				<p class="mx-auto mb-4 max-w-2xl text-2xl font-medium text-[#212E21]">
-					Una ayudita para el postre?
+					Una ayudita para el postre? 💸
 				</p>
 				<p class="mx-auto mb-8 max-w-2xl text-xl font-light text-[#6A7B67]">
 					DE75512108001245126199
@@ -315,111 +403,8 @@
 	</div>
 </section>
 
-<!-- Venue Section -->
-<section id="venue" class="bg-[#E8DEC9] py-24">
-	<div class="container mx-auto px-6">
-		<div class="mx-auto max-w-6xl">
-			<div class="mb-20 text-center">
-				<h2 class="mb-6 text-4xl font-black tracking-tight text-[#212E21] md:text-6xl">
-					Nuestro Lugar
-				</h2>
-				<p class="mx-auto max-w-3xl text-xl font-light text-[#6A7B67]">
-					Un hermoso lugar donde nuestra historia de amor continúa
-				</p>
-			</div>
-
-			<div class="grid items-center gap-12 lg:grid-cols-2">
-				<div class="space-y-8">
-					<div class="rounded-lg border-2 border-[#212E21] bg-white/80 p-8">
-						<h3 class="mb-6 text-2xl font-bold text-[#212E21] md:text-3xl">
-							Lugar de la Ceremonia
-						</h3>
-						<div class="space-y-4 text-[#6A7B67]">
-							<p class="text-lg">📍 Hermoso Jardín</p>
-							<p>Calle de la Boda 123, Ciudad del Amor</p>
-							<p>Un entorno al aire libre impresionante rodeado de naturaleza</p>
-						</div>
-					</div>
-
-					<div class="rounded-lg border-2 border-[#212E21] bg-white/80 p-8">
-						<h3 class="mb-6 text-2xl font-bold text-[#212E21] md:text-3xl">
-							Lugar de la Recepción
-						</h3>
-						<div class="space-y-4 text-[#6A7B67]">
-							<p class="text-lg">🏛️ Salón Elegante</p>
-							<p>Avenida de la Celebración 456, Ciudad del Amor</p>
-							<p>Un espacio íntimo perfecto para cenar y bailar</p>
-						</div>
-					</div>
-				</div>
-
-				<div
-					class="flex h-96 items-center justify-center rounded-lg border-2 border-[#212E21] bg-white/50 p-8"
-				>
-					<div class="text-center">
-						<div
-							class="mx-auto mb-6 flex h-32 w-32 items-center justify-center rounded-lg border-2 border-[#212E21] bg-[#751F19]"
-						>
-							<svg class="h-16 w-16 text-[#E8DEC9]" fill="currentColor" viewBox="0 0 20 20">
-								<path
-									fill-rule="evenodd"
-									d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-									clip-rule="evenodd"
-								/>
-							</svg>
-						</div>
-						<p class="text-lg text-[#6A7B67]">Mapa interactivo y direcciones próximamente</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-
-<!-- Event Timeline Section -->
-<section id="event" class="bg-white/50 py-24">
-	<div class="container mx-auto px-6">
-		<div class="mx-auto max-w-4xl">
-			<div class="mb-20 text-center">
-				<h2 class="mb-6 text-4xl font-black tracking-tight text-[#212E21] md:text-6xl">
-					Cronograma del Evento
-				</h2>
-				<p class="text-xl font-light text-[#6A7B67]">
-					Así es como se desarrollará nuestro día especial
-				</p>
-			</div>
-
-			<div class="space-y-8">
-				<TimelineItem
-					time="3PM"
-					title="Comienza la Ceremonia"
-					description="Únete a nosotros mientras intercambiamos votos en un hermoso entorno al aire libre"
-				/>
-
-				<TimelineItem
-					time="4PM"
-					title="Hora del Cóctel"
-					description="Celebra con bebidas y aperitivos mientras nos tomamos fotos"
-				/>
-
-				<TimelineItem
-					time="6PM"
-					title="Recepción y Cena"
-					description="Disfruta de una deliciosa comida y discursos emotivos"
-				/>
-
-				<TimelineItem
-					time="8PM"
-					title="Baile y Celebración"
-					description="Bailemos toda la noche y celebremos nuestro nuevo comienzo"
-				/>
-			</div>
-		</div>
-	</div>
-</section>
-
 <!-- Phone Contact Section -->
-<Section id="rsvp" variant="beige">
+<Section id="rsvp" variant="white">
 	<div class="mx-auto max-w-2xl">
 		<div class="mb-16 text-center">
 			<h2 class="mb-6 text-4xl font-black tracking-tight text-[#212E21] md:text-6xl">
@@ -498,21 +483,6 @@
 				>
 					Save the date
 				</button>
-			</div>
-
-			<div class="mt-16 grid grid-cols-1 gap-8 text-[#E8DEC9] md:grid-cols-3">
-				<div class="text-center">
-					<div class="mb-2 text-3xl font-black">2025</div>
-					<div class="text-lg opacity-80">Año del Amor</div>
-				</div>
-				<div class="text-center">
-					<div class="mb-2 text-3xl font-black">∞</div>
-					<div class="text-lg opacity-80">Juntos para Siempre</div>
-				</div>
-				<div class="text-center">
-					<div class="mb-2 text-3xl font-black">❤️</div>
-					<div class="text-lg opacity-80">Un Amor</div>
-				</div>
 			</div>
 		</div>
 	</div>

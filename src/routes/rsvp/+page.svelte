@@ -1,16 +1,12 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import { Button, Section } from '$lib/components';
 	import { enhance } from '$app/forms';
-	import type { ActionData } from './$types';
+	import type { ActionData, PageData } from './$types';
 
-	export let form: ActionData;
+	let { form, data }: { form: ActionData; data: PageData } = $props();
 
-	let companion = 'no';
-	let transport = 'no';
-
-	// Get phone from URL parameter
-	$: phoneParam = $page.url.searchParams.get('phone') || '';
+	let companion = $state('no');
+	let transport = $state('no');
 
 	function handleRadioChange(name: string, value: string) {
 		if (name === 'companion') {
@@ -75,79 +71,87 @@
 						<input
 							type="tel"
 							name="phone"
-							value={phoneParam}
-							class="w-full rounded-md border-2 border-[#212E21] bg-white px-4 py-3 focus:border-[#751F19] focus:ring-2 focus:ring-[#751F19]"
+							value={data.phone}
+							readonly
+							class="w-full cursor-not-allowed rounded-md border-2 border-[#212E21] bg-gray-100 px-4 py-3"
 							placeholder="+34 123 456 789"
 							required
 						/>
 					</div>
 
-					<div>
-						<label class="mb-4 block text-sm font-bold text-[#212E21]">Acompañante</label>
-						<div class="grid gap-4 md:grid-cols-2">
-							<label
-								for="companion"
-								class="flex cursor-pointer items-center rounded-md border-2 border-[#212E21] bg-white p-4 transition-colors hover:border-[#751F19]"
-								on:click={() => handleRadioChange('companion', 'yes')}
-							>
-								<input
-									type="radio"
-									name="companion"
-									value="yes"
-									class="sr-only"
-									bind:group={companion}
-									required
-								/>
-								<div
-									class="mr-3 flex h-5 w-5 items-center justify-center rounded-full border-2 border-[#751F19]"
-								>
-									<div
-										class="h-2 w-2 rounded-full bg-[#751F19] transition-opacity {companion === 'yes'
-											? 'opacity-100'
-											: 'opacity-0'}"
-									></div>
-								</div>
-								<span class="font-bold text-[#212E21]">👫 Vendré con acompañante</span>
-							</label>
-							<label
-								class="flex cursor-pointer items-center rounded-md border-2 border-[#212E21] bg-white p-4 transition-colors hover:border-[#751F19]"
-								on:click={() => handleRadioChange('companion', 'no')}
-							>
-								<input
-									type="radio"
-									name="companion"
-									value="no"
-									class="sr-only"
-									bind:group={companion}
-									required
-								/>
-								<div
-									class="mr-3 flex h-5 w-5 items-center justify-center rounded-full border-2 border-[#751F19]"
-								>
-									<div
-										class="h-2 w-2 rounded-full bg-[#751F19] transition-opacity {companion === 'no'
-											? 'opacity-100'
-											: 'opacity-0'}"
-									></div>
-								</div>
-								<span class="font-bold text-[#212E21]">🙋‍♂️ Vendré solo/a</span>
-							</label>
-						</div>
-					</div>
-
-					{#if companion === 'yes'}
+					{#if !data.shouldHideCompanion}
 						<div>
-							<label for="companionName" class="mb-2 block text-sm font-bold text-[#212E21]"
-								>Nombre del Acompañante</label
-							>
-							<input
-								type="text"
-								name="companionName"
-								class="w-full rounded-md border-2 border-[#212E21] bg-white px-4 py-3 focus:border-[#751F19] focus:ring-2 focus:ring-[#751F19]"
-								placeholder="Nombre y apellidos de tu acompañante"
-								required
-							/>
+							<label class="mb-4 block text-sm font-bold text-[#212E21]">Acompañante</label>
+							<div class="grid gap-4 md:grid-cols-2">
+								<label
+									for="companion"
+									class="flex cursor-pointer items-center rounded-md border-2 border-[#212E21] bg-white p-4 transition-colors hover:border-[#751F19]"
+									on:click={() => handleRadioChange('companion', 'yes')}
+								>
+									<input
+										type="radio"
+										name="companion"
+										value="yes"
+										class="sr-only"
+										bind:group={companion}
+										required
+									/>
+									<div
+										class="mr-3 flex h-5 w-5 items-center justify-center rounded-full border-2 border-[#751F19]"
+									>
+										<div
+											class="h-2 w-2 rounded-full bg-[#751F19] transition-opacity {companion ===
+											'yes'
+												? 'opacity-100'
+												: 'opacity-0'}"
+										></div>
+									</div>
+									<span class="font-bold text-[#212E21]">👫 Vendré con acompañante</span>
+								</label>
+								<label
+									class="flex cursor-pointer items-center rounded-md border-2 border-[#212E21] bg-white p-4 transition-colors hover:border-[#751F19]"
+									on:click={() => handleRadioChange('companion', 'no')}
+								>
+									<input
+										type="radio"
+										name="companion"
+										value="no"
+										class="sr-only"
+										bind:group={companion}
+										required
+									/>
+									<div
+										class="mr-3 flex h-5 w-5 items-center justify-center rounded-full border-2 border-[#751F19]"
+									>
+										<div
+											class="h-2 w-2 rounded-full bg-[#751F19] transition-opacity {companion ===
+											'no'
+												? 'opacity-100'
+												: 'opacity-0'}"
+										></div>
+									</div>
+									<span class="font-bold text-[#212E21]">🙋‍♂️ Vendré solo/a</span>
+								</label>
+							</div>
 						</div>
+
+						{#if companion === 'yes'}
+							<div>
+								<label for="companionName" class="mb-2 block text-sm font-bold text-[#212E21]"
+									>Nombre del Acompañante</label
+								>
+								<input
+									type="text"
+									name="companionName"
+									class="w-full rounded-md border-2 border-[#212E21] bg-white px-4 py-3 focus:border-[#751F19] focus:ring-2 focus:ring-[#751F19]"
+									placeholder="Nombre y apellidos de tu acompañante"
+									required
+								/>
+							</div>
+						{/if}
+					{:else}
+						<!-- Hidden input for companion when not shown -->
+						<input type="hidden" name="companion" value="no" />
 					{/if}
 
 					<div>

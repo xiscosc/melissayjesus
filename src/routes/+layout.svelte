@@ -114,6 +114,12 @@
 						Inicio
 					</button>
 					<button
+						onclick={() => scrollToSection('event')}
+						class="relative rounded-md px-4 py-2 font-sans text-sm font-bold tracking-wide text-[#212E21] transition-all duration-300 hover:bg-[#212E21]/10 hover:text-[#212E21]"
+					>
+						Evento
+					</button>
+					<button
 						onclick={() => scrollToSection('venue')}
 						class="relative rounded-md px-4 py-2 font-sans text-sm font-bold tracking-wide text-[#212E21] transition-all duration-300 hover:bg-[#212E21]/10 hover:text-[#212E21]"
 					>
@@ -130,12 +136,6 @@
 						class="relative rounded-md px-4 py-2 font-sans text-sm font-bold tracking-wide text-[#212E21] transition-all duration-300 hover:bg-[#212E21]/10 hover:text-[#212E21]"
 					>
 						Crowdfunding
-					</button>
-					<button
-						onclick={() => scrollToSection('event')}
-						class="relative rounded-md px-4 py-2 font-sans text-sm font-bold tracking-wide text-[#212E21] transition-all duration-300 hover:bg-[#212E21]/10 hover:text-[#212E21]"
-					>
-						Evento
 					</button>
 					<button
 						onclick={() => scrollToSection('rsvp')}
@@ -206,6 +206,12 @@
 							Inicio
 						</button>
 						<button
+							onclick={() => scrollToSection('event')}
+							class="block w-full rounded-md px-4 py-3 text-left font-sans text-base font-bold tracking-wide text-[#212E21] transition-colors duration-200 hover:bg-[#212E21]/10"
+						>
+							Evento
+						</button>
+						<button
 							onclick={() => scrollToSection('venue')}
 							class="block w-full rounded-md px-4 py-3 text-left font-sans text-base font-bold tracking-wide text-[#212E21] transition-colors duration-200 hover:bg-[#212E21]/10"
 						>
@@ -222,12 +228,6 @@
 							class="block w-full rounded-md px-4 py-3 text-left font-sans text-base font-bold tracking-wide text-[#212E21] transition-colors duration-200 hover:bg-[#212E21]/10"
 						>
 							Crowdfunding
-						</button>
-						<button
-							onclick={() => scrollToSection('event')}
-							class="block w-full rounded-md px-4 py-3 text-left font-sans text-base font-bold tracking-wide text-[#212E21] transition-colors duration-200 hover:bg-[#212E21]/10"
-						>
-							Evento
 						</button>
 						<button
 							onclick={() => scrollToSection('rsvp')}
