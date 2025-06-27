@@ -32,7 +32,8 @@
 		Section,
 		CountrySelect,
 		Map,
-		ClickableImage
+		ClickableImage,
+		ImageModal
 	} from '$lib/components';
 
 	let countryCode = '+34';
@@ -40,6 +41,21 @@
 
 	let iban = 'ES3701825319720208485582';
 	let copyButtonText = 'Copiar';
+
+	// Shared modal state
+	let modalOpen = false;
+	let modalSrc: string | any = '';
+	let modalAlt: string = '';
+
+	function openModal(src: string | any, alt: string) {
+		modalSrc = src;
+		modalAlt = alt;
+		modalOpen = true;
+	}
+
+	function closeModal() {
+		modalOpen = false;
+	}
 
 	async function copyIban() {
 		if (copyButtonText !== 'Copiar') return;
@@ -157,11 +173,18 @@
 					<div
 						class="flex-shrink-0 snap-start rounded-lg border-2 border-[#212E21] bg-white/80 p-2"
 					>
-						<ClickableImage
-							src={image}
-							alt="Gallery image {i + 1}"
-							className="h-64 w-64 sm:w-80 object-cover rounded-lg"
-						/>
+						<div class="cursor-pointer transition-transform duration-200 hover:scale-[1.02]">
+							<enhanced:img
+								src={image}
+								alt="Gallery image {i + 1}"
+								class="h-64 w-64 rounded-lg object-cover transition-opacity duration-200 hover:opacity-90 sm:w-80"
+								onclick={() => openModal(image, `Gallery image ${i + 1}`)}
+								onkeydown={(e) => e.key === 'Enter' && openModal(image, `Gallery image ${i + 1}`)}
+								role="button"
+								tabindex="0"
+								aria-label="Click to view larger image"
+							/>
+						</div>
 					</div>
 				{/each}
 			</div>
@@ -529,6 +552,9 @@
 		</div>
 	</div>
 </section>
+
+<!-- Shared Image Modal -->
+<ImageModal src={modalSrc} alt={modalAlt} isOpen={modalOpen} onclose={closeModal} />
 
 <style>
 	@keyframes fade-in {
