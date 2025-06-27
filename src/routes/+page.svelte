@@ -147,7 +147,7 @@
 		</div>
 
 		<!-- Image Gallery -->
-		<div class="relative">
+		<div class="gallery-container-wrapper relative">
 			<!-- Gallery container -->
 			<div
 				id="gallery-container"
@@ -553,5 +553,29 @@
 
 	.scrollbar-hide::-webkit-scrollbar {
 		display: none;
+	}
+
+	.gallery-container-wrapper::after {
+		content: '';
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 16px; /* Account for pb-4 */
+		width: 60px;
+		background: linear-gradient(90deg, transparent 0%, rgba(232, 222, 201, 1) 100%);
+		pointer-events: none;
+		z-index: 10;
+	}
+
+	.gallery-container-wrapper::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 16px; /* Account for pb-4 */
+		width: 60px;
+		background: linear-gradient(90deg, rgba(232, 222, 201, 1) 0%, transparent 100%);
+		pointer-events: none;
+		z-index: 10;
 	}
 </style>
