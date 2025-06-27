@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import homeImage from '$lib/assets/home2.jpg?enhanced';
 	import presentGif from '$lib/assets/algo-de-postre-no-que-se-nos-v.gif';
 	import weddingRings from '$lib/assets/noun-wedding-rings-57138.svg';
@@ -28,9 +27,7 @@
 	].sort(() => Math.random() - 0.5);
 	import {
 		Button,
-		Card,
 		DetailCard,
-		IconBox,
 		TimelineItem,
 		Section,
 		CountrySelect,
@@ -151,43 +148,6 @@
 
 		<!-- Image Gallery -->
 		<div class="relative">
-			<!-- Left scroll button -->
-			<button
-				class="absolute top-1/2 left-2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border-2 border-[#212E21] bg-white/90 text-[#212E21] shadow-lg transition-all duration-200 hover:bg-[#212E21] hover:text-white focus:ring-2 focus:ring-[#212E21] focus:outline-none md:left-4"
-				onclick={() => {
-					const container = document.getElementById('gallery-container');
-					if (container) {
-						container.scrollBy({ left: -300, behavior: 'smooth' });
-					}
-				}}
-				aria-label="Scroll left"
-			>
-				<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="M15 19l-7-7 7-7"
-					/>
-				</svg>
-			</button>
-
-			<!-- Right scroll button -->
-			<button
-				class="absolute top-1/2 right-2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border-2 border-[#212E21] bg-white/90 text-[#212E21] shadow-lg transition-all duration-200 hover:bg-[#212E21] hover:text-white focus:ring-2 focus:ring-[#212E21] focus:outline-none md:right-4"
-				onclick={() => {
-					const container = document.getElementById('gallery-container');
-					if (container) {
-						container.scrollBy({ left: 300, behavior: 'smooth' });
-					}
-				}}
-				aria-label="Scroll right"
-			>
-				<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-				</svg>
-			</button>
-
 			<!-- Gallery container -->
 			<div
 				id="gallery-container"

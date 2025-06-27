@@ -25,13 +25,13 @@
 	$: isEnhanced = typeof src === 'object' && src !== null;
 </script>
 
-<svelte:window on:keydown={handleKeydown} />
+<svelte:window onkeydown={handleKeydown} />
 
 {#if isOpen}
 	<!-- Modal backdrop -->
 	<div
-		class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
-		on:click={handleBackdropClick}
+		class="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 p-4"
+		onclick={handleBackdropClick}
 		role="dialog"
 		aria-modal="true"
 		aria-label="Image viewer"
@@ -40,7 +40,7 @@
 		<div class="relative max-h-[90vh] max-w-[90vw]">
 			<!-- Close button -->
 			<button
-				on:click={closeModal}
+				onclick={closeModal}
 				class="absolute -top-12 right-0 flex h-10 w-10 items-center justify-center rounded-full bg-white/20 text-white transition-all duration-200 hover:bg-white/30 focus:ring-2 focus:ring-white/50 focus:outline-none"
 				aria-label="Close image"
 			>
