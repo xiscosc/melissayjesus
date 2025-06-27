@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let src: string;
+	export let src: string | any;
 	export let alt: string;
 	export let isOpen = false;
 	export let onclose: (() => void) | undefined = undefined;
@@ -20,6 +20,9 @@
 			closeModal();
 		}
 	}
+
+	// Check if src is an enhanced image object or a string
+	$: isEnhanced = typeof src === 'object' && src !== null;
 </script>
 
 <svelte:window on:keydown={handleKeydown} />
@@ -52,7 +55,11 @@
 			</button>
 
 			<!-- Image -->
-			<img {src} {alt} class="max-h-[90vh] max-w-full rounded-lg object-contain" loading="lazy" />
+			{#if isEnhanced}
+				<enhanced:img {src} {alt} class="max-h-[90vh] max-w-full rounded-lg object-contain" />
+			{:else}
+				<img {src} {alt} class="max-h-[90vh] max-w-full rounded-lg object-contain" loading="lazy" />
+			{/if}
 		</div>
 	</div>
 {/if}

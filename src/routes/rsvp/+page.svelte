@@ -2,11 +2,35 @@
 	import { Button, Section } from '$lib/components';
 	import { enhance } from '$app/forms';
 	import type { ActionData, PageData } from './$types';
+	import { onMount } from 'svelte';
 
 	let { form, data }: { form: ActionData; data: PageData } = $props();
 
 	let companion = $state('no');
 	let transport = $state('no');
+	let alreadySubmitted = $state(false);
+	let submittedName = $state('');
+
+	onMount(() => {
+		if (typeof localStorage !== 'undefined') {
+			const storedRsvp = localStorage.getItem(`rsvp_${data.phone}`);
+			if (storedRsvp) {
+				const rsvpData = JSON.parse(storedRsvp);
+				submittedName = rsvpData.name;
+				alreadySubmitted = true;
+			}
+		}
+	});
+
+	$effect(() => {
+		if (form?.success && form.name && data.phone) {
+			if (typeof localStorage !== 'undefined') {
+				localStorage.setItem(`rsvp_${data.phone}`, JSON.stringify({ name: form.name }));
+			}
+			alreadySubmitted = true;
+			submittedName = form.name;
+		}
+	});
 
 	function handleRadioChange(name: string, value: string) {
 		if (name === 'companion') {
@@ -35,9 +59,21 @@
 		</div>
 
 		<div class="rounded-lg border-2 border-[#212E21] bg-white/80 p-8 md:p-12">
-			{#if form?.success}
+			{#if alreadySubmitted}
 				<div class="text-center">
-					<div class="mb-8 text-6xl">💒</div>
+					<div class="mb-8 text-6xl">🙌</div>
+					<h2 class="mb-6 text-4xl font-black tracking-tight text-[#212E21] md:text-5xl">
+						¡Gracias {submittedName}!
+					</h2>
+					<p class="mb-4 text-2xl font-bold text-[#751F19]">Tu asistencia ya está confirmada.</p>
+					<p class="text-xl font-light text-[#6A7B67]">Nos vemos en la boda</p>
+					<p class="mt-6 text-base text-gray-600">
+						Si necesitas hacer algún cambio, contáctanos por WhatsApp.
+					</p>
+				</div>
+			{:else if form?.success}
+				<div class="text-center">
+					<div class="mb-8 text-6xl">🙌</div>
 					<h2 class="mb-6 text-4xl font-black tracking-tight text-[#212E21] md:text-5xl">
 						¡Gracias {form.name}!
 					</h2>
@@ -45,6 +81,9 @@
 						{form.message}
 					</p>
 					<p class="text-xl font-light text-[#6A7B67]">Nos vemos en la boda</p>
+					<p class="mt-6 text-base text-gray-600">
+						Si necesitas hacer algún cambio, contáctanos por WhatsApp.
+					</p>
 				</div>
 			{:else}
 				{#if form?.error}
@@ -55,7 +94,9 @@
 
 				<form method="POST" use:enhance class="space-y-6">
 					<div>
-						<label class="mb-2 block text-sm font-bold text-[#212E21]">Nombre Completo</label>
+						<label class="mb-2 block text-sm font-bold text-[#212E21]" for="name"
+							>Nombre Completo</label
+						>
 						<input
 							type="text"
 							name="name"
@@ -67,9 +108,10 @@
 					</div>
 
 					<div>
-						<label class="mb-2 block text-sm font-bold text-[#212E21]">Teléfono</label>
+						<label class="mb-2 block text-sm font-bold text-[#212E21]" for="phone">Teléfono</label>
 						<input
 							type="tel"
+							inputmode="tel"
 							name="phone"
 							value={data.phone}
 							readonly

@@ -3,6 +3,29 @@
 	import homeImage from '$lib/assets/home2.jpg?enhanced';
 	import presentGif from '$lib/assets/algo-de-postre-no-que-se-nos-v.gif';
 	import weddingRings from '$lib/assets/noun-wedding-rings-57138.svg';
+	import gallery1 from '$lib/assets/gallery/WhatsApp Image 2025-06-27 at 11.10.09.jpeg?enhanced';
+	import gallery2 from '$lib/assets/gallery/WhatsApp Image 2025-06-27 at 11.10.22.jpeg?enhanced';
+	import gallery3 from '$lib/assets/gallery/WhatsApp Image 2025-06-27 at 11.10.22 (1).jpeg?enhanced';
+	import gallery4 from '$lib/assets/gallery/WhatsApp Image 2025-06-27 at 11.10.47.jpeg?enhanced';
+	import gallery5 from '$lib/assets/gallery/WhatsApp Image 2025-06-27 at 11.10.56.jpeg?enhanced';
+	import gallery6 from '$lib/assets/gallery/WhatsApp Image 2025-06-27 at 11.11.39.jpeg?enhanced';
+	import gallery7 from '$lib/assets/gallery/WhatsApp Image 2025-06-27 at 11.11.54.jpeg?enhanced';
+	import gallery8 from '$lib/assets/gallery/WhatsApp Image 2025-06-27 at 18.26.16.jpeg?enhanced';
+	import gallery9 from '$lib/assets/gallery/WhatsApp Image 2025-06-27 at 18.26.32.jpeg?enhanced';
+	import gallery10 from '$lib/assets/gallery/WhatsApp Image 2025-06-27 at 18.32.02.jpeg?enhanced';
+
+	const galleryImages = [
+		gallery1,
+		gallery2,
+		gallery3,
+		gallery4,
+		gallery5,
+		gallery6,
+		gallery7,
+		gallery8,
+		gallery9,
+		gallery10
+	].sort(() => Math.random() - 0.5);
 	import {
 		Button,
 		Card,
@@ -18,6 +41,27 @@
 	let countryCode = '+34';
 	let phoneNumber = '';
 
+	let iban = 'ES3701825319720208485582';
+	let copyButtonText = 'Copiar';
+
+	async function copyIban() {
+		if (copyButtonText !== 'Copiar') return;
+
+		try {
+			await navigator.clipboard.writeText(iban);
+			copyButtonText = '¡Copiado!';
+			setTimeout(() => {
+				copyButtonText = 'Copiar';
+			}, 2000);
+		} catch (err) {
+			console.error('Failed to copy: ', err);
+			copyButtonText = 'Error :(';
+			setTimeout(() => {
+				copyButtonText = 'Copiar';
+			}, 2000);
+		}
+	}
+
 	function handlePhoneSubmit(event: Event) {
 		event.preventDefault();
 
@@ -26,7 +70,7 @@
 		}
 
 		const completePhone = countryCode + phoneNumber.trim();
-		goto(`/rsvp?phone=${encodeURIComponent(completePhone)}`);
+		window.location.href = `/rsvp?phone=${encodeURIComponent(completePhone)}`;
 	}
 </script>
 
@@ -93,49 +137,74 @@
 	</div>
 </section>
 
-<!-- Our Story Section -->
+<!-- Gallery Section -->
 <Section variant="beige">
-	<div class="mx-auto max-w-6xl">
+	<div class="mx-auto max-w-7xl">
 		<div class="mb-20 text-center">
 			<h2 class="mb-6 text-4xl font-black tracking-tight text-[#212E21] md:text-6xl">
 				Nuestra Historia
 			</h2>
 			<p class="mx-auto max-w-3xl text-xl leading-relaxed font-light text-[#6A7B67] md:text-2xl">
-				Cada historia de amor es hermosa, pero la nuestra es nuestra favorita. Acompáñanos mientras
-				comenzamos este nuevo capítulo juntos.
+				Momentos especiales que nos han traído hasta aquí
 			</p>
 		</div>
 
-		<div class="grid gap-8 md:grid-cols-2 md:gap-12">
-			<Card>
-				<IconBox>
-					<svg class="h-10 w-10 text-[#E8DEC9]" fill="currentColor" viewBox="0 0 20 20">
-						<path
-							fill-rule="evenodd"
-							d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-							clip-rule="evenodd"
-						/>
-					</svg>
-				</IconBox>
-				<h3 class="mb-4 text-2xl font-bold text-[#212E21] md:text-3xl">Cómo Nos Conocimos</h3>
-				<p class="text-lg leading-relaxed text-[#6A7B67]">
-					Nuestros caminos se cruzaron de la manera más inesperada, y desde ese momento, supimos que
-					estábamos destinados a estar juntos para siempre.
-				</p>
-			</Card>
+		<!-- Image Gallery -->
+		<div class="relative">
+			<!-- Left scroll button -->
+			<button
+				class="absolute top-1/2 left-2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border-2 border-[#212E21] bg-white/90 text-[#212E21] shadow-lg transition-all duration-200 hover:bg-[#212E21] hover:text-white focus:ring-2 focus:ring-[#212E21] focus:outline-none md:left-4"
+				onclick={() => {
+					const container = document.getElementById('gallery-container');
+					if (container) {
+						container.scrollBy({ left: -300, behavior: 'smooth' });
+					}
+				}}
+				aria-label="Scroll left"
+			>
+				<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M15 19l-7-7 7-7"
+					/>
+				</svg>
+			</button>
 
-			<Card>
-				<IconBox>
-					<svg class="h-10 w-10 text-[#E8DEC9]" fill="currentColor" viewBox="0 0 20 20">
-						<path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-					</svg>
-				</IconBox>
-				<h3 class="mb-4 text-2xl font-bold text-[#212E21] md:text-3xl">La Propuesta</h3>
-				<p class="text-lg leading-relaxed text-[#6A7B67]">
-					Un momento perfecto que atesoraremos para siempre, marcando el comienzo de nuestro viaje
-					hacia el para siempre.
-				</p>
-			</Card>
+			<!-- Right scroll button -->
+			<button
+				class="absolute top-1/2 right-2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border-2 border-[#212E21] bg-white/90 text-[#212E21] shadow-lg transition-all duration-200 hover:bg-[#212E21] hover:text-white focus:ring-2 focus:ring-[#212E21] focus:outline-none md:right-4"
+				onclick={() => {
+					const container = document.getElementById('gallery-container');
+					if (container) {
+						container.scrollBy({ left: 300, behavior: 'smooth' });
+					}
+				}}
+				aria-label="Scroll right"
+			>
+				<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+				</svg>
+			</button>
+
+			<!-- Gallery container -->
+			<div
+				id="gallery-container"
+				class="scrollbar-hide flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4"
+			>
+				{#each galleryImages as image, i}
+					<div
+						class="flex-shrink-0 snap-start rounded-lg border-2 border-[#212E21] bg-white/80 p-2"
+					>
+						<ClickableImage
+							src={image}
+							alt="Gallery image {i + 1}"
+							className="h-64 w-80 object-cover rounded-lg"
+						/>
+					</div>
+				{/each}
+			</div>
 		</div>
 	</div>
 </Section>
@@ -385,13 +454,25 @@
 				<p class="mx-auto mb-4 max-w-2xl text-2xl font-medium text-[#212E21]">
 					Una ayudita para el postre? 💸
 				</p>
-				<p class="mx-auto mb-8 max-w-2xl text-xl font-light text-[#6A7B67]">
-					DE75512108001245126199
-				</p>
+				<div class="mx-auto mb-8 flex max-w-max items-center justify-center gap-4 rounded-lg p-2">
+					<p class="text-xl font-light text-[#6A7B67]">ES37 0182 5319 7202 0848 5582</p>
+					<button
+						onclick={copyIban}
+						class="flex w-32 items-center justify-center gap-2 rounded-lg border-2 border-[#212E21] bg-[#751F19] px-3 py-2 text-sm font-bold text-[#E8DEC9] transition-all duration-300 hover:bg-[#212E21]"
+						aria-label="Copiar IBAN"
+					>
+						<span>{copyButtonText}</span>
+						{#if copyButtonText === 'Copiar'}
+							<span>📋</span>
+						{:else if copyButtonText === '¡Copiado!'}
+							<span>✅</span>
+						{/if}
+					</button>
+				</div>
 			</div>
 
 			<div class="flex justify-center">
-				<div class="rounded-lg border-2 border-[#212E21] bg-[#E8DEC9] p-8">
+				<div class="rounded-lg border-2 border-[#212E21] bg-white/80 p-2">
 					<img
 						src={presentGif}
 						alt="Una ayudita pa'l postre"
@@ -427,6 +508,7 @@
 						</div>
 						<input
 							type="tel"
+							inputmode="tel"
 							bind:value={phoneNumber}
 							class="min-w-0 flex-1 rounded-md border-2 border-[#212E21] px-3 py-3 text-sm focus:border-[#751F19] focus:ring-2 focus:ring-[#751F19] sm:px-4 sm:text-base"
 							placeholder="123 456 789"
@@ -502,5 +584,14 @@
 
 	.animate-fade-in {
 		animation: fade-in 1s ease-out;
+	}
+
+	.scrollbar-hide {
+		-ms-overflow-style: none;
+		scrollbar-width: none;
+	}
+
+	.scrollbar-hide::-webkit-scrollbar {
+		display: none;
 	}
 </style>

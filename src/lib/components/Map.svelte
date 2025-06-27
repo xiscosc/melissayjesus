@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
 
-	export let lat = 39.6434045; // Default to Palma, Mallorca coordinates
+	export let lat = 39.6434045;
 	export let lng = 3.0070244;
 	export let zoom = 12;
 	export let height = '384px'; // h-96 equivalent
