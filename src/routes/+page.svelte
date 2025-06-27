@@ -455,7 +455,7 @@
 					Una ayudita para el postre? 💸
 				</p>
 				<div class="mx-auto mb-8 flex max-w-max items-center justify-center gap-4 rounded-lg p-2">
-					<p class="text-xl font-light text-[#6A7B67]">ES37 0182 5319 7202 0848 5582</p>
+					<p class="text-xl font-light text-[#6A7B67]">{iban}</p>
 					<button
 						onclick={copyIban}
 						class="flex w-32 items-center justify-center gap-2 rounded-lg border-2 border-[#212E21] bg-[#751F19] px-3 py-2 text-sm font-bold text-[#E8DEC9] transition-all duration-300 hover:bg-[#212E21]"
