@@ -200,7 +200,7 @@
 						<ClickableImage
 							src={image}
 							alt="Gallery image {i + 1}"
-							className="h-64 w-80 object-cover rounded-lg"
+							className="h-64 w-64 sm:w-80 object-cover rounded-lg"
 						/>
 					</div>
 				{/each}
