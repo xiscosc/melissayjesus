@@ -13,6 +13,7 @@
 	let lastTime = 0;
 	let animationId: number;
 	let hasMoved = false;
+	let isMobile = false;
 
 	// Rubber band constants
 	const RUBBER_BAND_RESISTANCE = 0.5;
@@ -23,22 +24,19 @@
 	onMount(() => {
 		if (!galleryContainer) return;
 
-		// Touch events
-		galleryContainer.addEventListener('touchstart', handleStart, { passive: false });
-		galleryContainer.addEventListener('touchmove', handleMove, { passive: false });
-		galleryContainer.addEventListener('touchend', handleEnd);
+		// Detect if mobile
+		isMobile = 'ontouchstart' in window;
 
-		// Mouse events for desktop
-		galleryContainer.addEventListener('mousedown', handleStart);
-		galleryContainer.addEventListener('mousemove', handleMove);
-		galleryContainer.addEventListener('mouseup', handleEnd);
-		galleryContainer.addEventListener('mouseleave', handleEnd);
+		if (!isMobile) {
+			// Only add custom scrolling for desktop
+			galleryContainer.addEventListener('mousedown', handleStart);
+			galleryContainer.addEventListener('mousemove', handleMove);
+			galleryContainer.addEventListener('mouseup', handleEnd);
+			galleryContainer.addEventListener('mouseleave', handleEnd);
+		}
 
 		return () => {
-			if (galleryContainer) {
-				galleryContainer.removeEventListener('touchstart', handleStart);
-				galleryContainer.removeEventListener('touchmove', handleMove);
-				galleryContainer.removeEventListener('touchend', handleEnd);
+			if (galleryContainer && !isMobile) {
 				galleryContainer.removeEventListener('mousedown', handleStart);
 				galleryContainer.removeEventListener('mousemove', handleMove);
 				galleryContainer.removeEventListener('mouseup', handleEnd);
@@ -55,7 +53,7 @@
 	}
 
 	function handleStart(event: TouchEvent | MouseEvent) {
-		if (!galleryContainer) return;
+		if (!galleryContainer || isMobile) return;
 
 		isDragging = true;
 		hasMoved = false;
@@ -64,11 +62,6 @@
 		lastTime = Date.now();
 		scrollLeft = galleryContainer.scrollLeft;
 		velocity = 0;
-
-		// Prevent default to avoid conflicts
-		if ('touches' in event) {
-			event.preventDefault();
-		}
 
 		// Stop any ongoing animation
 		if (animationId) {
@@ -79,7 +72,7 @@
 	}
 
 	function handleMove(event: TouchEvent | MouseEvent) {
-		if (!isDragging || !galleryContainer) return;
+		if (!isDragging || !galleryContainer || isMobile) return;
 
 		const currentX = getClientX(event);
 		const moveDistance = Math.abs(currentX - startX);
@@ -124,7 +117,7 @@
 	}
 
 	function handleEnd() {
-		if (!isDragging || !galleryContainer) return;
+		if (!isDragging || !galleryContainer || isMobile) return;
 
 		isDragging = false;
 		galleryContainer.style.cursor = 'grab';
@@ -224,7 +217,9 @@
 	<!-- Gallery container -->
 	<div
 		bind:this={galleryContainer}
-		class="scrollbar-hide flex cursor-grab snap-x snap-mandatory gap-4 overflow-x-auto pb-4 select-none"
+		class="scrollbar-hide flex gap-4 overflow-x-auto pb-4 select-none {isMobile
+			? ''
+			: 'cursor-grab'}"
 		style="scroll-behavior: auto;"
 	>
 		{#each images as image, i}
