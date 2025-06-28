@@ -25,6 +25,14 @@
 		gallery9,
 		gallery10
 	];
+
+	const venueImages = [
+		'https://images.squarespace-cdn.com/content/v1/667d006d47cdcd35aae21833/7f5e7754-4863-43fb-aff5-63e96770de71/1677620004607.jpg?format=1500w',
+		'https://images.squarespace-cdn.com/content/v1/667d006d47cdcd35aae21833/135f8b3f-0327-493c-9076-1527a4a99633/DJI_0129.JPG',
+		'https://images.squarespace-cdn.com/content/v1/667d006d47cdcd35aae21833/b3508353-261b-40c3-8862-6d949c09edcd/19.jpg',
+		'https://images.squarespace-cdn.com/content/v1/667d006d47cdcd35aae21833/1719469639096-H89AFE2FZK44I1SSYN8F/25.jpg?format=2500w',
+		'https://images.squarespace-cdn.com/content/v1/667d006d47cdcd35aae21833/70091736-5c1d-4876-b538-b88324a16238/79a5d78a-ba5e-42a1-b610-13be95528314.JPG?format=1500w'
+	];
 	import {
 		Button,
 		DetailCard,
@@ -32,7 +40,8 @@
 		Section,
 		CountrySelect,
 		Map,
-		ClickableImage
+		ClickableImage,
+		RubberBandGallery
 	} from '$lib/components';
 
 	let countryCode = '+34';
@@ -147,25 +156,7 @@
 		</div>
 
 		<!-- Image Gallery -->
-		<div class="gallery-container-wrapper relative">
-			<!-- Gallery container -->
-			<div
-				id="gallery-container"
-				class="scrollbar-hide flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4"
-			>
-				{#each galleryImages as image, i}
-					<div
-						class="flex-shrink-0 snap-start rounded-lg border-2 border-[#212E21] bg-white/80 p-2"
-					>
-						<ClickableImage
-							src={image}
-							alt="Gallery image {i + 1}"
-							className="h-64 w-64 sm:w-80 object-cover rounded-lg"
-						/>
-					</div>
-				{/each}
-			</div>
-		</div>
+		<RubberBandGallery images={galleryImages} />
 	</div>
 </Section>
 
@@ -264,85 +255,53 @@
 				</p>
 			</div>
 
+			<!-- Venue Photos Gallery -->
+			<div class="mb-12">
+				<RubberBandGallery images={venueImages} />
+			</div>
+
 			<div class="grid gap-8 lg:grid-cols-2">
-				<!-- Photos Section -->
-				<div class="space-y-6">
-					<!-- Interior Photo -->
-					<div class="rounded-lg border-2 border-[#212E21] bg-white/80 p-2">
-						<div class="overflow-hidden rounded-lg">
-							<ClickableImage
-								src="https://images.squarespace-cdn.com/content/v1/667d006d47cdcd35aae21833/7f5e7754-4863-43fb-aff5-63e96770de71/1677620004607.jpg?format=1500w"
-								alt="Frontón Sineu interior"
-								className="h-64 w-full object-cover"
-							/>
-						</div>
-					</div>
-
-					<!-- Aerial Photo -->
-					<div class="rounded-lg border-2 border-[#212E21] bg-white/80 p-2">
-						<div class="overflow-hidden rounded-lg">
-							<ClickableImage
-								src="https://images.squarespace-cdn.com/content/v1/667d006d47cdcd35aae21833/135f8b3f-0327-493c-9076-1527a4a99633/DJI_0129.JPG"
-								alt="Frontón Sineu aerial view"
-								className="h-64 w-full object-cover"
-							/>
-						</div>
-					</div>
-
-					<!-- Third Photo -->
-					<div class="rounded-lg border-2 border-[#212E21] bg-white/80 p-2">
-						<div class="overflow-hidden rounded-lg">
-							<ClickableImage
-								src="https://images.squarespace-cdn.com/content/v1/667d006d47cdcd35aae21833/b3508353-261b-40c3-8862-6d949c09edcd/19.jpg"
-								alt="Frontón Sineu venue"
-								className="h-64 w-full object-cover"
-							/>
+				<!-- Directions -->
+				<div
+					class="flex flex-col justify-center rounded-lg border-2 border-[#212E21] bg-white/80 p-8 text-center"
+				>
+					<h3 class="mb-6 text-2xl font-bold text-[#212E21] md:text-3xl">Dirección</h3>
+					<div class="space-y-6">
+						<p class="text-lg text-[#6A7B67]">📍 Carrer Frontó, 16, 07510 Sineu</p>
+						<div class="flex flex-col gap-3 sm:flex-row">
+							<a
+								href="https://maps.google.com/?q=39.6434045,3.0070244"
+								target="_blank"
+								rel="noopener noreferrer"
+								class="flex items-center justify-center gap-2 rounded-lg border-2 border-[#212E21] bg-[#751F19] px-4 py-3 text-sm font-bold text-[#E8DEC9] transition-all duration-300 hover:bg-[#212E21] sm:flex-1"
+							>
+								<img
+									src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg"
+									alt="Google"
+									class="h-5 w-5"
+								/>
+								Google Maps
+							</a>
+							<a
+								href="https://maps.apple.com/?q=39.6434045,3.0070244"
+								target="_blank"
+								rel="noopener noreferrer"
+								class="flex items-center justify-center gap-2 rounded-lg border-2 border-[#212E21] bg-white px-4 py-3 text-sm font-bold text-[#212E21] transition-all duration-300 hover:bg-[#212E21] hover:text-[#E8DEC9] sm:flex-1"
+							>
+								<img
+									src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg"
+									alt="Apple"
+									class="h-5 w-5"
+								/>
+								Apple Maps
+							</a>
 						</div>
 					</div>
 				</div>
 
-				<!-- Directions & Map Section -->
-				<div class="space-y-8">
-					<!-- Directions -->
-					<div class="rounded-lg border-2 border-[#212E21] bg-white/80 p-8">
-						<h3 class="mb-6 text-2xl font-bold text-[#212E21] md:text-3xl">Dirección</h3>
-						<div class="space-y-6">
-							<p class="text-lg text-[#6A7B67]">📍 Carrer Frontó, 16, 07510 Sineu</p>
-							<div class="flex flex-col gap-3 sm:flex-row">
-								<a
-									href="https://maps.google.com/?q=39.6434045,3.0070244"
-									target="_blank"
-									rel="noopener noreferrer"
-									class="flex items-center justify-center gap-2 rounded-lg border-2 border-[#212E21] bg-[#751F19] px-4 py-3 text-sm font-bold text-[#E8DEC9] transition-all duration-300 hover:bg-[#212E21] sm:flex-1"
-								>
-									<img
-										src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg"
-										alt="Google"
-										class="h-5 w-5"
-									/>
-									Google Maps
-								</a>
-								<a
-									href="https://maps.apple.com/?q=39.6434045,3.0070244"
-									target="_blank"
-									rel="noopener noreferrer"
-									class="flex items-center justify-center gap-2 rounded-lg border-2 border-[#212E21] bg-white px-4 py-3 text-sm font-bold text-[#212E21] transition-all duration-300 hover:bg-[#212E21] hover:text-[#E8DEC9] sm:flex-1"
-								>
-									<img
-										src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg"
-										alt="Apple"
-										class="h-5 w-5"
-									/>
-									Apple Maps
-								</a>
-							</div>
-						</div>
-					</div>
-
-					<!-- Map -->
-					<div class="h-96">
-						<Map />
-					</div>
+				<!-- Map -->
+				<div class="h-96">
+					<Map />
 				</div>
 			</div>
 		</div>
@@ -363,9 +322,9 @@
 			</div>
 
 			<div class="grid gap-8 md:grid-cols-2 lg:gap-12">
-				<div class="group">
+				<div class="group flex">
 					<div
-						class="transform rounded-lg border-2 border-[#212E21] bg-white/80 p-8 transition-all duration-500 hover:-translate-y-1"
+						class="flex flex-1 transform flex-col rounded-lg border-2 border-[#212E21] bg-white/80 p-8 transition-all duration-500 hover:-translate-y-1"
 					>
 						<div
 							class="mb-8 flex h-20 w-20 items-center justify-center rounded-lg border-2 border-[#212E21] bg-[#751F19] text-4xl"
@@ -373,7 +332,7 @@
 							🚌
 						</div>
 						<h3 class="mb-4 text-2xl font-bold text-[#212E21] md:text-3xl">Autocar</h3>
-						<div class="space-y-4 text-lg text-[#6A7B67]">
+						<div class="flex-1 space-y-4 text-lg text-[#6A7B67]">
 							<p>📍 Desde Palma</p>
 							<p><strong>Salida:</strong> Próximamente</p>
 							<p><strong>Vuelta:</strong> Próximamente</p>
@@ -382,9 +341,9 @@
 					</div>
 				</div>
 
-				<div class="group">
+				<div class="group flex">
 					<div
-						class="transform rounded-lg border-2 border-[#212E21] bg-white/80 p-8 transition-all duration-500 hover:-translate-y-1"
+						class="flex flex-1 transform flex-col rounded-lg border-2 border-[#212E21] bg-white/80 p-8 transition-all duration-500 hover:-translate-y-1"
 					>
 						<div
 							class="mb-8 flex h-20 w-20 items-center justify-center rounded-lg border-2 border-[#212E21] bg-[#751F19] text-4xl"
@@ -392,7 +351,7 @@
 							🚙
 						</div>
 						<h3 class="mb-4 text-2xl font-bold text-[#212E21] md:text-3xl">Coche</h3>
-						<div class="space-y-4 text-lg text-[#6A7B67]">
+						<div class="flex-1 space-y-4 text-lg text-[#6A7B67]">
 							<p>🅿️ Párking</p>
 							<p><strong>Dirección:</strong> Próximamente</p>
 						</div>
@@ -544,38 +503,5 @@
 
 	.animate-fade-in {
 		animation: fade-in 1s ease-out;
-	}
-
-	.scrollbar-hide {
-		-ms-overflow-style: none;
-		scrollbar-width: none;
-	}
-
-	.scrollbar-hide::-webkit-scrollbar {
-		display: none;
-	}
-
-	.gallery-container-wrapper::after {
-		content: '';
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 16px; /* Account for pb-4 */
-		width: 60px;
-		background: linear-gradient(90deg, transparent 0%, rgba(232, 222, 201, 1) 100%);
-		pointer-events: none;
-		z-index: 10;
-	}
-
-	.gallery-container-wrapper::before {
-		content: '';
-		position: absolute;
-		top: 0;
-		left: 0;
-		bottom: 16px; /* Account for pb-4 */
-		width: 60px;
-		background: linear-gradient(90deg, rgba(232, 222, 201, 1) 0%, transparent 100%);
-		pointer-events: none;
-		z-index: 10;
 	}
 </style>

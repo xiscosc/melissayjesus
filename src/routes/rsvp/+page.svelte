@@ -10,6 +10,8 @@
 	let transport = $state('no');
 	let alreadySubmitted = $state(false);
 	let submittedName = $state('');
+	let turnstileToken = $state('');
+	let turnstileContainer: HTMLDivElement;
 
 	onMount(() => {
 		if (typeof localStorage !== 'undefined') {
@@ -19,6 +21,30 @@
 				submittedName = rsvpData.name;
 				alreadySubmitted = true;
 			}
+		}
+
+		// Initialize Turnstile when the script loads
+		if (!alreadySubmitted && data.turnstileSiteKey) {
+			const checkTurnstile = () => {
+				if (typeof window !== 'undefined' && (window as any).turnstile && turnstileContainer) {
+					(window as any).turnstile.render(turnstileContainer, {
+						sitekey: data.turnstileSiteKey,
+						callback: (token: string) => {
+							turnstileToken = token;
+						},
+						'expired-callback': () => {
+							turnstileToken = '';
+						},
+						'error-callback': () => {
+							turnstileToken = '';
+						},
+						theme: 'light'
+					});
+				} else {
+					setTimeout(checkTurnstile, 100);
+				}
+			};
+			checkTurnstile();
 		}
 	});
 
@@ -44,6 +70,9 @@
 <svelte:head>
 	<title>RSVP - Melissa & Jesús</title>
 	<meta name="description" content="Confirma tu asistencia a la boda de Melissa & Jesús" />
+	{#if data.turnstileSiteKey}
+		<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+	{/if}
 </svelte:head>
 
 <!-- RSVP Form Section -->
@@ -273,8 +302,24 @@
 						/>
 					</div>
 
+					{#if data.turnstileSiteKey}
+						<!-- Cloudflare Turnstile -->
+						<div class="flex justify-center">
+							<div bind:this={turnstileContainer}></div>
+						</div>
+
+						<!-- Hidden input to pass the turnstile token -->
+						<input type="hidden" name="cf-turnstile-response" value={turnstileToken} />
+					{/if}
+
 					<div>
-						<Button type="submit" class="w-full">Enviar Confirmación ✨</Button>
+						<Button
+							type="submit"
+							class="w-full"
+							disabled={data.turnstileSiteKey && !turnstileToken}
+						>
+							Enviar Confirmación ✨
+						</Button>
 					</div>
 				</form>
 			{/if}

@@ -1,6 +1,12 @@
 import type { Actions, PageServerLoad } from './$types';
 import { fail, redirect } from '@sveltejs/kit';
-import { WEBHOOK_ENDPOINT, WEBHOOK_API_KEY, NON_COMPANION } from '$env/static/private';
+import {
+	WEBHOOK_ENDPOINT,
+	WEBHOOK_API_KEY,
+	NON_COMPANION,
+	TURNSTILE_SECRET_KEY
+} from '$env/static/private';
+import { PUBLIC_TURNSTILE_SITE_KEY } from '$env/static/public';
 
 function checkIfNonCompanion(phone: string): boolean {
 	if (!phone || !NON_COMPANION) return false;
@@ -15,6 +21,27 @@ function checkIfNonCompanion(phone: string): boolean {
 	});
 }
 
+async function verifyTurnstile(token: string): Promise<boolean> {
+	try {
+		const response = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded'
+			},
+			body: new URLSearchParams({
+				secret: TURNSTILE_SECRET_KEY,
+				response: token
+			})
+		});
+
+		const result = await response.json();
+		return result.success;
+	} catch (error) {
+		console.error('Turnstile verification error:', error);
+		return false;
+	}
+}
+
 export const load: PageServerLoad = async ({ url }) => {
 	const phone = url.searchParams.get('phone');
 
@@ -24,13 +51,27 @@ export const load: PageServerLoad = async ({ url }) => {
 
 	return {
 		phone,
-		shouldHideCompanion: checkIfNonCompanion(phone)
+		shouldHideCompanion: checkIfNonCompanion(phone),
+		turnstileSiteKey: PUBLIC_TURNSTILE_SITE_KEY
 	};
 };
 
 export const actions: Actions = {
 	default: async ({ request, fetch }) => {
 		const data = await request.formData();
+
+		// Verify Turnstile token
+		const turnstileToken = data.get('cf-turnstile-response') as string;
+		if (!turnstileToken) {
+			return fail(400, { error: 'Verificación de seguridad requerida' });
+		}
+
+		const isValidTurnstile = await verifyTurnstile(turnstileToken);
+		if (!isValidTurnstile) {
+			return fail(400, {
+				error: 'Verificación de seguridad falló. Por favor, inténtalo de nuevo.'
+			});
+		}
 
 		// Parse form data to JSON
 		const phone = data.get('phone') as string;
