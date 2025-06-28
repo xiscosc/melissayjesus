@@ -14,6 +14,10 @@
 	let animationId: number;
 	let hasMoved = false;
 	let isMobile = false;
+	let isTransitioning = false;
+
+	// Create infinite loop by duplicating images
+	$: infiniteImages = [...images, ...images, ...images];
 
 	// Rubber band constants
 	const RUBBER_BAND_RESISTANCE = 0.5;
@@ -27,6 +31,14 @@
 		// Detect if mobile
 		isMobile = 'ontouchstart' in window;
 
+		// Set initial scroll position to middle section (second set of images)
+		setTimeout(() => {
+			if (galleryContainer && images.length > 0) {
+				const imageWidth = galleryContainer.scrollWidth / infiniteImages.length;
+				galleryContainer.scrollLeft = imageWidth * images.length;
+			}
+		}, 0);
+
 		if (!isMobile) {
 			// Only add custom scrolling for desktop
 			galleryContainer.addEventListener('mousedown', handleStart);
@@ -35,12 +47,18 @@
 			galleryContainer.addEventListener('mouseleave', handleEnd);
 		}
 
+		// Add scroll listener for infinite loop detection
+		galleryContainer.addEventListener('scroll', handleScroll);
+
 		return () => {
-			if (galleryContainer && !isMobile) {
-				galleryContainer.removeEventListener('mousedown', handleStart);
-				galleryContainer.removeEventListener('mousemove', handleMove);
-				galleryContainer.removeEventListener('mouseup', handleEnd);
-				galleryContainer.removeEventListener('mouseleave', handleEnd);
+			if (galleryContainer) {
+				galleryContainer.removeEventListener('scroll', handleScroll);
+				if (!isMobile) {
+					galleryContainer.removeEventListener('mousedown', handleStart);
+					galleryContainer.removeEventListener('mousemove', handleMove);
+					galleryContainer.removeEventListener('mouseup', handleEnd);
+					galleryContainer.removeEventListener('mouseleave', handleEnd);
+				}
 			}
 			if (animationId) {
 				cancelAnimationFrame(animationId);
@@ -50,6 +68,31 @@
 
 	function getClientX(event: TouchEvent | MouseEvent): number {
 		return 'touches' in event ? event.touches[0]?.clientX || 0 : event.clientX;
+	}
+
+	function handleScroll() {
+		if (!galleryContainer || isTransitioning || images.length === 0) return;
+
+		const scrollLeft = galleryContainer.scrollLeft;
+		const imageWidth = galleryContainer.scrollWidth / infiniteImages.length;
+		const totalWidth = imageWidth * images.length;
+
+		// If scrolled to the beginning (first set), jump to middle set
+		if (scrollLeft <= imageWidth * 0.5) {
+			isTransitioning = true;
+			galleryContainer.scrollLeft = scrollLeft + totalWidth;
+			setTimeout(() => {
+				isTransitioning = false;
+			}, 0);
+		}
+		// If scrolled to the end (third set), jump to middle set
+		else if (scrollLeft >= totalWidth * 2 - imageWidth * 0.5) {
+			isTransitioning = true;
+			galleryContainer.scrollLeft = scrollLeft - totalWidth;
+			setTimeout(() => {
+				isTransitioning = false;
+			}, 0);
+		}
 	}
 
 	function handleStart(event: TouchEvent | MouseEvent) {
@@ -97,18 +140,8 @@
 		const walkX = startX - currentX;
 		let newScrollLeft = scrollLeft + walkX;
 
-		// Get container bounds for rubber band effect
-		const maxScrollLeft = galleryContainer.scrollWidth - galleryContainer.clientWidth;
-
-		// Apply rubber band resistance when overscrolling
-		if (newScrollLeft < 0) {
-			// Overscrolling to the left
-			newScrollLeft = newScrollLeft * RUBBER_BAND_RESISTANCE;
-		} else if (newScrollLeft > maxScrollLeft) {
-			// Overscrolling to the right
-			const overscroll = newScrollLeft - maxScrollLeft;
-			newScrollLeft = maxScrollLeft + overscroll * RUBBER_BAND_RESISTANCE;
-		}
+		// For infinite scroll, we don't apply rubber band resistance
+		// Let the scroll happen naturally and handleScroll will manage the loop
 
 		galleryContainer.scrollLeft = newScrollLeft;
 
@@ -122,14 +155,8 @@
 		isDragging = false;
 		galleryContainer.style.cursor = 'grab';
 
-		const maxScrollLeft = galleryContainer.scrollWidth - galleryContainer.clientWidth;
-		const currentScrollLeft = galleryContainer.scrollLeft;
-
-		// Check if we need to bounce back from overscroll
-		if (currentScrollLeft < 0 || currentScrollLeft > maxScrollLeft) {
-			bounceBack();
-		} else if (Math.abs(velocity) > MIN_VELOCITY) {
-			// Apply momentum scrolling
+		// For infinite scroll, just apply momentum if there's velocity
+		if (Math.abs(velocity) > MIN_VELOCITY) {
 			applyMomentum();
 		}
 	}
@@ -184,27 +211,9 @@
 		function animate() {
 			if (!galleryContainer || Math.abs(currentVelocity) < MIN_VELOCITY) return;
 
-			const maxScrollLeft = galleryContainer.scrollWidth - galleryContainer.clientWidth;
 			let newScrollLeft = galleryContainer.scrollLeft - currentVelocity;
-
-			// Apply rubber band resistance during momentum
-			if (newScrollLeft < 0) {
-				newScrollLeft = newScrollLeft * RUBBER_BAND_RESISTANCE;
-				currentVelocity *= 0.6; // Reduce velocity when hitting boundary
-			} else if (newScrollLeft > maxScrollLeft) {
-				const overscroll = newScrollLeft - maxScrollLeft;
-				newScrollLeft = maxScrollLeft + overscroll * RUBBER_BAND_RESISTANCE;
-				currentVelocity *= 0.6;
-			}
-
 			galleryContainer.scrollLeft = newScrollLeft;
 			currentVelocity *= MOMENTUM_DECAY;
-
-			// Check if we need to bounce back
-			if (galleryContainer.scrollLeft < 0 || galleryContainer.scrollLeft > maxScrollLeft) {
-				bounceBack();
-				return;
-			}
 
 			animationId = requestAnimationFrame(animate);
 		}
@@ -222,11 +231,11 @@
 			: 'cursor-grab'}"
 		style="scroll-behavior: auto;"
 	>
-		{#each images as image, i}
+		{#each infiniteImages as image, i}
 			<div class="flex-shrink-0 snap-start rounded-lg border-2 border-[#212E21] bg-white/80 p-2">
 				<ClickableImage
 					src={image}
-					alt="Gallery image {i + 1}"
+					alt="Gallery image {(i % images.length) + 1}"
 					className="h-64 w-64 sm:w-80 object-cover rounded-lg"
 				/>
 			</div>
