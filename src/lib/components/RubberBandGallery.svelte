@@ -250,8 +250,8 @@
 		top: 0;
 		right: 0;
 		bottom: 16px; /* Account for pb-4 */
-		width: 60px;
-		background: linear-gradient(90deg, transparent 0%, rgba(232, 222, 201, 1) 100%);
+		width: 40px;
+		background: linear-gradient(90deg, transparent 0%, rgba(232, 222, 201, 0.8) 100%);
 		pointer-events: none;
 		z-index: 10;
 	}
@@ -262,8 +262,8 @@
 		top: 0;
 		left: 0;
 		bottom: 16px; /* Account for pb-4 */
-		width: 60px;
-		background: linear-gradient(90deg, rgba(232, 222, 201, 1) 0%, transparent 100%);
+		width: 40px;
+		background: linear-gradient(90deg, rgba(232, 222, 201, 0.8) 0%, transparent 100%);
 		pointer-events: none;
 		z-index: 10;
 	}
