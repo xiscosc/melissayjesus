@@ -54,13 +54,48 @@
 		if (copyButtonText !== 'Copiar') return;
 
 		try {
-			await navigator.clipboard.writeText(iban);
-			copyButtonText = '¡Copiado!';
-			setTimeout(() => {
-				copyButtonText = 'Copiar';
-			}, 2000);
+			if (navigator.clipboard && navigator.clipboard.writeText) {
+				await navigator.clipboard.writeText(iban);
+				copyButtonText = '¡Copiado!';
+				setTimeout(() => {
+					copyButtonText = 'Copiar';
+				}, 2000);
+			} else {
+				fallbackCopy(iban);
+			}
 		} catch (err) {
-			console.error('Failed to copy: ', err);
+			console.error('Failed to copy with clipboard API: ', err);
+			fallbackCopy(iban);
+		}
+	}
+
+	function fallbackCopy(text: string) {
+		try {
+			const textArea = document.createElement('textarea');
+			textArea.value = text;
+			textArea.style.position = 'fixed';
+			textArea.style.left = '-999999px';
+			textArea.style.top = '-999999px';
+			document.body.appendChild(textArea);
+			textArea.focus();
+			textArea.select();
+
+			const result = document.execCommand('copy');
+			document.body.removeChild(textArea);
+
+			if (result) {
+				copyButtonText = '¡Copiado!';
+				setTimeout(() => {
+					copyButtonText = 'Copiar';
+				}, 2000);
+			} else {
+				copyButtonText = 'Error :(';
+				setTimeout(() => {
+					copyButtonText = 'Copiar';
+				}, 2000);
+			}
+		} catch (err) {
+			console.error('Fallback copy failed: ', err);
 			copyButtonText = 'Error :(';
 			setTimeout(() => {
 				copyButtonText = 'Copiar';
@@ -82,7 +117,7 @@
 
 <svelte:head>
 	<title>Melissa & Jesús - Boda</title>
-	<meta name="description" content="Únete a nosotros para celebrar la boda de Melissa & Jesús" />
+	<meta name="description" content="Boda de Melissa & Jesús" />
 </svelte:head>
 
 <!-- Hero Section -->
@@ -178,7 +213,7 @@
 				>
 					📅
 				</div>
-				<h3 class="mb-6 text-2xl font-bold text-[#212E21] md:text-3xl">Cuando</h3>
+				<h3 class="mb-6 text-2xl font-bold text-[#212E21] md:text-3xl">Cuándo</h3>
 				<div class="space-y-2">
 					<p class="text-lg font-bold text-[#212E21]">13 de Diciembre</p>
 					<p class="text-[#6A7B67]">13:00</p>
@@ -258,9 +293,6 @@
 				<h2 class="mb-6 text-4xl font-black tracking-tight text-[#212E21] md:text-6xl">
 					Frontón Sineu
 				</h2>
-				<p class="mx-auto max-w-3xl text-xl font-light text-[#6A7B67]">
-					Donde celebraremos nuestra boda
-				</p>
 			</div>
 
 			<!-- Venue Photos Gallery -->
@@ -425,7 +457,7 @@
 			<form class="space-y-6" onsubmit={handlePhoneSubmit}>
 				<div>
 					<label for="phone" class="mb-2 block text-sm font-bold text-[#212E21]"
-						>Número de Teléfono *</label
+						>Pon tu número de teléfono *</label
 					>
 					<div class="flex items-stretch gap-2">
 						<div class="flex-shrink-0">
