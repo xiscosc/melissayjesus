@@ -1,17 +1,17 @@
 <script lang="ts">
-	import homeImage from '$lib/assets/home2.jpg?enhanced';
+	import homeImage from '$lib/assets/home3.jpg?enhanced';
 	import presentGif from '$lib/assets/algo-de-postre-no-que-se-nos-v.gif';
 	import weddingRings from '$lib/assets/noun-wedding-rings-57138.svg';
 	import gallery1 from '$lib/assets/gallery/WhatsApp Image 2025-06-27 at 11.10.09.jpeg?enhanced';
 	import gallery2 from '$lib/assets/gallery/WhatsApp Image 2025-06-27 at 11.10.22.jpeg?enhanced';
-	import gallery3 from '$lib/assets/gallery/WhatsApp Image 2025-06-27 at 11.10.22 (1).jpeg?enhanced';
+	import gallery10 from '$lib/assets/gallery/WhatsApp Image 2025-06-27 at 11.10.22 (1).jpeg?enhanced';
 	import gallery4 from '$lib/assets/gallery/WhatsApp Image 2025-06-27 at 11.10.47.jpeg?enhanced';
 	import gallery5 from '$lib/assets/gallery/WhatsApp Image 2025-06-27 at 11.10.56.jpeg?enhanced';
 	import gallery6 from '$lib/assets/gallery/WhatsApp Image 2025-06-27 at 11.11.39.jpeg?enhanced';
 	import gallery7 from '$lib/assets/gallery/WhatsApp Image 2025-06-27 at 11.11.54.jpeg?enhanced';
 	import gallery8 from '$lib/assets/gallery/WhatsApp Image 2025-06-27 at 18.26.16.jpeg?enhanced';
 	import gallery9 from '$lib/assets/gallery/WhatsApp Image 2025-06-27 at 18.26.32.jpeg?enhanced';
-	import gallery10 from '$lib/assets/gallery/WhatsApp Image 2025-06-27 at 18.32.02.jpeg?enhanced';
+	import gallery3 from '$lib/assets/gallery/WhatsApp Image 2025-06-27 at 18.32.02.jpeg?enhanced';
 
 	const galleryImages = [
 		gallery1,
@@ -148,11 +148,11 @@
 	<div class="mx-auto max-w-7xl">
 		<div class="mb-20 text-center">
 			<h2 class="mb-6 text-4xl font-black tracking-tight text-[#212E21] md:text-6xl">
-				Nuestra Historia
+				Nuestra Historia... por ahora
 			</h2>
-			<p class="mx-auto max-w-3xl text-xl leading-relaxed font-light text-[#6A7B67] md:text-2xl">
+			<!-- <p class="mx-auto max-w-3xl text-xl leading-relaxed font-light text-[#6A7B67] md:text-2xl">
 				Momentos especiales que nos han traído hasta aquí
-			</p>
+			</p> -->
 		</div>
 
 		<!-- Image Gallery -->
@@ -166,7 +166,7 @@
 		<div class="mb-20 text-center">
 			<h2 class="mb-6 text-4xl font-black tracking-tight text-[#212E21] md:text-6xl">La Boda</h2>
 			<p class="mx-auto max-w-2xl text-xl font-light text-[#6A7B67]">
-				Toda la información importante para nuestro día especial
+				Toda la información importante
 			</p>
 		</div>
 
@@ -181,7 +181,7 @@
 				<h3 class="mb-6 text-2xl font-bold text-[#212E21] md:text-3xl">Cuando</h3>
 				<div class="space-y-2">
 					<p class="text-lg font-bold text-[#212E21]">13 de Diciembre</p>
-					<p class="text-[#6A7B67]">Hora por confirmar</p>
+					<p class="text-[#6A7B67]">13:00</p>
 				</div>
 			</DetailCard>
 
@@ -230,13 +230,21 @@
 		<!-- Timeline Section -->
 		<div class="mx-auto max-w-4xl">
 			<div class="space-y-8">
-				<TimelineItem time="? PM" title="Ceremonia" description="Más detalles próximamente" />
+				<TimelineItem time="13:30" title="Bienvenida" description="Unas palabrejas" />
 
-				<TimelineItem time="? PM" title="Cóctel" description="Más detalles próximamente" />
+				<TimelineItem
+					time="14:00"
+					title="Cóctel"
+					description="Lo de las bandejitas y el vermú 🍸"
+				/>
 
-				<TimelineItem time="? PM" title="Cena" description="Más detalles próximamente" />
+				<TimelineItem
+					time="15:30"
+					title="Comida"
+					description="Adaptado a todos los gustos y sensibilidades varias"
+				/>
 
-				<TimelineItem time="? PM" title="Fiesta" description="Más detalles próximamente" />
+				<TimelineItem time="17:30" title="El Tardeo" description="Barra libre primeras marcas 🍹" />
 			</div>
 		</div>
 	</div>
@@ -316,9 +324,9 @@
 				<h2 class="mb-6 text-4xl font-black tracking-tight text-[#212E21] md:text-6xl">
 					Transporte
 				</h2>
-				<p class="mx-auto max-w-3xl text-xl font-light text-[#6A7B67]">
-					Te ayudamos a llegar a nuestra boda
-				</p>
+				<!-- <p class="mx-auto max-w-3xl text-xl font-light text-[#6A7B67]">
+					Cómo vas
+				</p> -->
 			</div>
 
 			<div class="grid gap-8 md:grid-cols-2 lg:gap-12">
@@ -410,9 +418,7 @@
 			<h2 class="mb-6 text-4xl font-black tracking-tight text-[#212E21] md:text-6xl">
 				Confirmar Asistencia
 			</h2>
-			<p class="mx-auto max-w-xl text-xl font-light text-[#6A7B67]">
-				¡No podemos esperar a celebrar contigo! Por favor, déjanos saber si nos acompañarás.
-			</p>
+			<p class="mx-auto max-w-xl text-xl font-light text-[#6A7B67]">Te esperamos!</p>
 		</div>
 
 		<div class="rounded-lg border-2 border-[#212E21] bg-white/80 p-8">
@@ -443,51 +449,6 @@
 </Section>
 
 <!-- CTA Section / Footer -->
-<section class="relative overflow-hidden bg-[#751F19] py-32">
-	<!-- Background decoration -->
-	<div
-		class="absolute inset-0 bg-gradient-to-br from-[#751F19]/20 via-[#751F19]/10 to-[#751F19]/20"
-	></div>
-	<div class="absolute top-0 left-1/4 h-96 w-96 rounded-full bg-[#E8DEC9]/10 blur-3xl"></div>
-	<div class="absolute right-1/4 bottom-0 h-80 w-80 rounded-full bg-[#E8DEC9]/10 blur-3xl"></div>
-
-	<div class="relative z-10 container mx-auto px-6 text-center">
-		<div class="mx-auto max-w-4xl">
-			<h2 class="mb-8 text-4xl font-black tracking-tight text-[#E8DEC9] md:text-6xl">
-				Únete a Nuestra Celebración
-			</h2>
-			<p
-				class="mx-auto mb-12 max-w-3xl text-xl leading-relaxed font-light text-[#E8DEC9]/90 md:text-2xl"
-			>
-				¡No podemos esperar a celebrar este día especial con nuestra familia y amigos! Por favor,
-				déjanos saber si nos acompañarás.
-			</p>
-
-			<div class="flex flex-col items-center justify-center gap-6 sm:flex-row">
-				<Button
-					variant="secondary"
-					onclick={() => document.getElementById('rsvp')?.scrollIntoView({ behavior: 'smooth' })}
-				>
-					Confirmar Ahora
-					<svg class="ml-3 h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M13 7l5 5m0 0l-5 5m5-5H6"
-						></path>
-					</svg>
-				</Button>
-
-				<button
-					class="inline-flex items-center justify-center rounded-lg border-2 border-[#E8DEC9] px-8 py-5 text-lg font-bold text-[#E8DEC9] transition-all duration-300 hover:bg-[#E8DEC9] hover:text-[#212E21]"
-				>
-					Save the date
-				</button>
-			</div>
-		</div>
-	</div>
-</section>
 
 <style>
 	@keyframes fade-in {

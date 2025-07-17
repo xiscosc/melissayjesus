@@ -83,7 +83,7 @@
 				Confirmar Asistencia
 			</h1>
 			<p class="mx-auto max-w-2xl text-xl font-light text-[#6A7B67]">
-				¡No podemos esperar a celebrar contigo! Por favor, déjanos saber si nos acompañarás.
+				Por favor, rellena con tus datos 😀
 			</p>
 		</div>
 
