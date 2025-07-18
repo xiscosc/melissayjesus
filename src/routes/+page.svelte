@@ -154,7 +154,7 @@
 			</p>
 		</div>
 		<div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
-			<Button
+			<!-- <Button
 				onclick={() => document.getElementById('rsvp')?.scrollIntoView({ behavior: 'smooth' })}
 			>
 				Confirmar Ahora
@@ -166,9 +166,9 @@
 						d="M13 7l5 5m0 0l-5 5m5-5H6"
 					></path>
 				</svg>
-			</Button>
+			</Button> -->
 			<Button
-				variant="outline"
+				variant="primary"
 				onclick={() =>
 					document.querySelector('section:not(#home)')?.scrollIntoView({ behavior: 'smooth' })}
 			>
@@ -364,10 +364,10 @@
 			<div class="grid gap-8 md:grid-cols-2 lg:gap-12">
 				<div class="group flex">
 					<div
-						class="flex flex-1 transform flex-col rounded-lg border-2 border-[#212E21] bg-white/80 p-8 transition-all duration-500 hover:-translate-y-1"
+						class="flex flex-1 transform flex-col rounded-lg border-2 border-[#212E21] bg-white/80 p-8 text-center transition-all duration-500 hover:-translate-y-1"
 					>
 						<div
-							class="mb-8 flex h-20 w-20 items-center justify-center rounded-lg border-2 border-[#212E21] bg-[#751F19] text-4xl"
+							class="mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-lg border-2 border-[#212E21] bg-[#751F19] text-4xl"
 						>
 							🚌
 						</div>
@@ -383,17 +383,44 @@
 
 				<div class="group flex">
 					<div
-						class="flex flex-1 transform flex-col rounded-lg border-2 border-[#212E21] bg-white/80 p-8 transition-all duration-500 hover:-translate-y-1"
+						class="flex flex-1 transform flex-col rounded-lg border-2 border-[#212E21] bg-white/80 p-8 text-center transition-all duration-500 hover:-translate-y-1"
 					>
 						<div
-							class="mb-8 flex h-20 w-20 items-center justify-center rounded-lg border-2 border-[#212E21] bg-[#751F19] text-4xl"
+							class="mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-lg border-2 border-[#212E21] bg-[#751F19] text-4xl"
 						>
 							🚙
 						</div>
 						<h3 class="mb-4 text-2xl font-bold text-[#212E21] md:text-3xl">Coche</h3>
 						<div class="flex-1 space-y-4 text-lg text-[#6A7B67]">
 							<p>🅿️ Párking</p>
-							<p><strong>Dirección:</strong> Próximamente</p>
+							<div class="flex flex-col gap-3 sm:flex-row">
+								<a
+									href="https://maps.google.com/?q=39.643614,3.006508"
+									target="_blank"
+									rel="noopener noreferrer"
+									class="flex items-center justify-center gap-2 rounded-lg border-2 border-[#212E21] bg-[#751F19] px-4 py-3 text-sm font-bold text-[#E8DEC9] transition-all duration-300 hover:bg-[#212E21] sm:flex-1"
+								>
+									<img
+										src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg"
+										alt="Google"
+										class="h-5 w-5"
+									/>
+									Google Maps
+								</a>
+								<a
+									href="https://maps.apple.com/?q=39.643614,3.006508"
+									target="_blank"
+									rel="noopener noreferrer"
+									class="flex items-center justify-center gap-2 rounded-lg border-2 border-[#212E21] bg-white px-4 py-3 text-sm font-bold text-[#212E21] transition-all duration-300 hover:bg-[#212E21] hover:text-[#E8DEC9] sm:flex-1"
+								>
+									<img
+										src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg"
+										alt="Apple"
+										class="h-5 w-5"
+									/>
+									Apple Maps
+								</a>
+							</div>
 						</div>
 					</div>
 				</div>
