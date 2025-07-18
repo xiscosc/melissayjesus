@@ -437,7 +437,7 @@
 					Crowdfunding
 				</h2>
 				<p class="mx-auto mb-4 max-w-2xl text-2xl font-medium text-[#212E21]">
-					Una ayudita para el postre? 💸
+					¿Una ayudita para el postre? 💸
 				</p>
 				<div class="mx-auto mb-8 flex max-w-max items-center justify-center gap-4 rounded-lg p-2">
 					<p class="text-xl font-light text-[#6A7B67]">{iban}</p>
