@@ -68,8 +68,7 @@
 </script>
 
 <svelte:head>
-	<title>RSVP - Melissa & Jesús</title>
-	<meta name="description" content="Confirma tu asistencia a la boda de Melissa & Jesús" />
+	<title>Melissa & Jesús</title>
 	{#if data.turnstileSiteKey}
 		<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 	{/if}

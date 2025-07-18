@@ -116,8 +116,7 @@
 </script>
 
 <svelte:head>
-	<title>Melissa & Jesús - Boda</title>
-	<meta name="description" content="Boda de Melissa & Jesús" />
+	<title>Melissa & Jesús</title>
 </svelte:head>
 
 <!-- Hero Section -->
