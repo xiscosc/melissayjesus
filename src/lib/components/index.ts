@@ -7,3 +7,4 @@ export { default as Map } from './Map.svelte';
 export { default as ClickableImage } from './ClickableImage.svelte';
 export { default as ImageModal } from './ImageModal.svelte';
 export { default as RubberBandGallery } from './RubberBandGallery.svelte';
+export { default as Footer } from './Footer.svelte';

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Button, Section } from '$lib/components';
+	import { Button, Section, Footer } from '$lib/components';
 	import { enhance } from '$app/forms';
 	import type { ActionData, PageData } from './$types';
 	import { onMount } from 'svelte';
@@ -325,3 +325,5 @@
 		</div>
 	</div>
 </Section>
+
+<Footer />
