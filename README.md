@@ -1,38 +1,78 @@
-# sv
+# Melissa & Jesús Wedding Website
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A beautiful wedding website built for Melissa & Jesús's wedding celebration on December 13, 2025.
 
-## Creating a project
+## ⚠️ AI-Generated Disclaimer
 
-If you're seeing this, you've probably already done this step. Congrats!
+**This entire project has been generated with [Claude Code](https://claude.ai/code).** The website was created through AI assistance, including design, functionality, and content structure.
+
+## About the Project
+
+This is a modern, responsive wedding website featuring:
+
+- **Hero Section** with wedding announcement and save-the-date
+- **Photo Gallery** showcasing the couple's journey
+- **Event Details** with timeline, venue information, and logistics
+- **Venue Information** with interactive maps and directions
+- **Transportation** details for guests
+- **RSVP System** with phone number collection
+- **Gift Registry** (crowdfunding section)
+
+## Tech Stack
+
+- **SvelteKit** - Modern web framework
+- **TypeScript** - Type-safe JavaScript
+- **Tailwind CSS** - Utility-first CSS framework
+- **Enhanced Images** - Optimized image handling
+
+## Features
+
+- Fully responsive design
+- Interactive photo galleries with rubber band animation effects
+- Google Maps & Apple Maps integration
+- IBAN copy-to-clipboard functionality
+- Country code selector for international phone numbers
+- Smooth scrolling navigation
+- Modern gradient and color scheme
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (18+ recommended)
+- npm, pnpm, or yarn
+
+### Installation
 
 ```bash
-# create a new project in the current directory
-npx sv create
+# Install dependencies
+npm install
 
-# create a new project in my-app
-npx sv create my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
+# Start development server
 npm run dev
 
-# or start the server and open the app in a new browser tab
+# Open in browser
 npm run dev -- --open
 ```
 
-## Building
-
-To create a production version of your app:
+### Building
 
 ```bash
+# Create production build
 npm run build
+
+# Preview production build
+npm run preview
 ```
 
-You can preview the production build with `npm run preview`.
+## Project Structure
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+```
+src/
+├── lib/
+│   ├── assets/          # Images and media files
+│   └── components/      # Reusable Svelte components
+├── routes/
+│   └── +page.svelte     # Main wedding page
+└── app.html             # HTML template
+```
