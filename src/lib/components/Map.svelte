@@ -2,8 +2,8 @@
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
 
-	export let lat = 39.6434045;
-	export let lng = 3.0070244;
+	export let lat = 39.59882206943887;
+	export let lng = 2.6919833748601274;
 	export let zoom = 12;
 	export let height = '384px'; // h-96 equivalent
 
@@ -53,7 +53,7 @@
 
 			// Add a marker for the venue
 			const marker = L.marker([lat, lng]).addTo(map);
-			marker.bindPopup('<b>Frontón Sineu</b><br/>Melissa & Jesús<br/>13 de Diciembre 2025');
+			marker.bindPopup('<b>Bodegas Suau</b><br/>Melissa & Jesús<br/>13 de Diciembre 2025');
 
 			// Force map to invalidate size after a short delay
 			setTimeout(() => {

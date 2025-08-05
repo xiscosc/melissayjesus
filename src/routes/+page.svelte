@@ -27,11 +27,11 @@
 	];
 
 	const venueImages = [
-		'https://images.squarespace-cdn.com/content/v1/667d006d47cdcd35aae21833/7f5e7754-4863-43fb-aff5-63e96770de71/1677620004607.jpg?format=1500w',
-		'https://images.squarespace-cdn.com/content/v1/667d006d47cdcd35aae21833/135f8b3f-0327-493c-9076-1527a4a99633/DJI_0129.JPG',
-		'https://images.squarespace-cdn.com/content/v1/667d006d47cdcd35aae21833/b3508353-261b-40c3-8862-6d949c09edcd/19.jpg',
-		'https://images.squarespace-cdn.com/content/v1/667d006d47cdcd35aae21833/1719469639096-H89AFE2FZK44I1SSYN8F/25.jpg?format=2500w',
-		'https://images.squarespace-cdn.com/content/v1/667d006d47cdcd35aae21833/70091736-5c1d-4876-b538-b88324a16238/79a5d78a-ba5e-42a1-b610-13be95528314.JPG?format=1500w'
+		'https://www.bodegassuau.ch/wp-content/uploads/2021/03/visits-bodega-suau.jpg',
+		'https://www.bodegassuau.ch/wp-content/uploads/2021/03/visit-suau-1-600x533.jpg',
+		'https://www.bodegassuau.com/cache/galleries/contents-24/suau-visita-00.jpg',
+		'https://www.bodegassuau.com/cache/galleries/contents-12/600-400/evento-private-suau.jpg',
+		'https://www.bodegassuau.ch/wp-content/uploads/2021/03/bodegas-suau_eventoscompressed.jpg'
 	];
 	import {
 		Button,
@@ -229,7 +229,7 @@
 				</div>
 				<h3 class="mb-6 text-2xl font-bold text-[#212E21] md:text-3xl">Dónde</h3>
 				<div class="space-y-2">
-					<p class="text-lg font-bold text-[#212E21]">Frontón Sineu</p>
+					<p class="text-lg font-bold text-[#212E21]">Bodegas Suau</p>
 					<button
 						onclick={() => document.getElementById('venue')?.scrollIntoView({ behavior: 'smooth' })}
 						class="inline-flex items-center font-bold text-[#6A7B67] transition-colors duration-200 hover:text-[#212E21]"
@@ -291,13 +291,22 @@
 		<div class="mx-auto max-w-6xl">
 			<div class="mb-20 text-center">
 				<h2 class="mb-6 text-4xl font-black tracking-tight text-[#212E21] md:text-6xl">
-					Frontón Sineu
+					Bodegas Suau
 				</h2>
 			</div>
 
-			<!-- Venue Photos Gallery -->
+			<!-- Venue Logo -->
 			<div class="mb-12">
-				<RubberBandGallery images={venueImages} />
+				<div
+					class="h-64 overflow-hidden rounded-lg border-2 border-[#212E21] bg-white/80 p-2 md:h-80"
+				>
+					<img
+						src="https://pbs.twimg.com/profile_images/1303592789368877056/6NOA9mQ7_400x400.jpg"
+						alt="Bodegas Suau Logo"
+						class="my-2 h-full w-full scale-125 object-cover"
+						style="object-position: center;"
+					/>
+				</div>
 			</div>
 
 			<div class="grid gap-8 lg:grid-cols-2">
@@ -307,10 +316,10 @@
 				>
 					<h3 class="mb-6 text-2xl font-bold text-[#212E21] md:text-3xl">Dirección</h3>
 					<div class="space-y-6">
-						<p class="text-lg text-[#6A7B67]">📍 Carrer Frontó, 16, 07510 Sineu</p>
+						<p class="text-lg text-[#6A7B67]">📍 Camí Cabana, 12, 07141 Es Pont d'Inca</p>
 						<div class="flex flex-col gap-3 sm:flex-row">
 							<a
-								href="https://maps.google.com/?q=39.6434045,3.0070244"
+								href="https://maps.app.goo.gl/yKYQKyTRgUFYWCKSA"
 								target="_blank"
 								rel="noopener noreferrer"
 								class="flex items-center justify-center gap-2 rounded-lg border-2 border-[#212E21] bg-[#751F19] px-4 py-3 text-sm font-bold text-[#E8DEC9] transition-all duration-300 hover:bg-[#212E21] sm:flex-1"
@@ -323,7 +332,7 @@
 								Google Maps
 							</a>
 							<a
-								href="https://maps.apple.com/?q=39.6434045,3.0070244"
+								href="https://maps.apple.com/place?address=Camí de la sa Cabana, 12, 07141 Marratxí, Balearic Isles, Spain&coordinate=39.598906,2.692305&name=Bodegas Suau&place-id=I2347CB6131BD7B1C&map=explore"
 								target="_blank"
 								rel="noopener noreferrer"
 								class="flex items-center justify-center gap-2 rounded-lg border-2 border-[#212E21] bg-white px-4 py-3 text-sm font-bold text-[#212E21] transition-all duration-300 hover:bg-[#212E21] hover:text-[#E8DEC9] sm:flex-1"
@@ -393,34 +402,7 @@
 						<h3 class="mb-4 text-2xl font-bold text-[#212E21] md:text-3xl">Coche</h3>
 						<div class="flex-1 space-y-4 text-lg text-[#6A7B67]">
 							<p>🅿️ Párking</p>
-							<div class="flex flex-col gap-3 sm:flex-row">
-								<a
-									href="https://maps.google.com/?q=39.643614,3.006508"
-									target="_blank"
-									rel="noopener noreferrer"
-									class="flex items-center justify-center gap-2 rounded-lg border-2 border-[#212E21] bg-[#751F19] px-4 py-3 text-sm font-bold text-[#E8DEC9] transition-all duration-300 hover:bg-[#212E21] sm:flex-1"
-								>
-									<img
-										src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg"
-										alt="Google"
-										class="h-5 w-5"
-									/>
-									Google Maps
-								</a>
-								<a
-									href="https://maps.apple.com/?q=39.643614,3.006508"
-									target="_blank"
-									rel="noopener noreferrer"
-									class="flex items-center justify-center gap-2 rounded-lg border-2 border-[#212E21] bg-white px-4 py-3 text-sm font-bold text-[#212E21] transition-all duration-300 hover:bg-[#212E21] hover:text-[#E8DEC9] sm:flex-1"
-								>
-									<img
-										src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg"
-										alt="Apple"
-										class="h-5 w-5"
-									/>
-									Apple Maps
-								</a>
-							</div>
+							<p>Bodegas Suau ofrece párking para todos los asistentes</p>
 						</div>
 					</div>
 				</div>
