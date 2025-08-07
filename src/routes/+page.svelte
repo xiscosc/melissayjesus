@@ -296,15 +296,12 @@
 			</div>
 
 			<!-- Venue Logo -->
-			<div class="mb-12">
-				<div
-					class="h-64 overflow-hidden rounded-lg border-2 border-[#212E21] bg-white/80 p-2 md:h-80"
-				>
+			<div class="mb-12 flex justify-center">
+				<div class="w-full max-w-sm rounded-lg border-2 border-[#212E21] bg-white/80 p-2">
 					<img
 						src="https://pbs.twimg.com/profile_images/1303592789368877056/6NOA9mQ7_400x400.jpg"
 						alt="Bodegas Suau Logo"
-						class="my-2 h-full w-full scale-125 object-cover"
-						style="object-position: center;"
+						class="my-2 h-full w-full object-center"
 					/>
 				</div>
 			</div>
