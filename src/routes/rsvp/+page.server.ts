@@ -43,15 +43,17 @@ async function verifyTurnstile(token: string): Promise<boolean> {
 }
 
 export const load: PageServerLoad = async ({ url }) => {
+	redirect(302, '/');
+
 	const phone = url.searchParams.get('phone');
 
 	if (!phone) {
-		throw redirect(302, '/');
+		redirect(302, '/');
 	}
 
 	return {
 		phone,
-		shouldHideCompanion: checkIfNonCompanion(phone),
+		shouldHideCompanion: checkIfNonCompanion(phone!),
 		turnstileSiteKey: PUBLIC_TURNSTILE_SITE_KEY
 	};
 };

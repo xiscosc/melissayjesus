@@ -120,6 +120,38 @@
 	<title>Melissa & Jesús</title>
 </svelte:head>
 
+<!-- Announcement Banner -->
+<div class="relative z-50 bg-[#751F19] py-3 text-[#E8DEC9] shadow-md">
+	<div class="overflow-hidden">
+		<div class="animate-marquee flex whitespace-nowrap">
+			<button
+				onclick={() => document.getElementById('transport')?.scrollIntoView({ behavior: 'smooth' })}
+				class="mx-4 flex items-center gap-2 text-sm font-bold tracking-widest uppercase hover:underline md:text-base"
+			>
+				🚌 ¡INFORMACIÓN ACTUALIZADA SOBRE EL AUTOCAR! CLIC AQUÍ PARA VER MÁS DETALLES 🚌
+			</button>
+			<button
+				onclick={() => document.getElementById('transport')?.scrollIntoView({ behavior: 'smooth' })}
+				class="mx-4 flex items-center gap-2 text-sm font-bold tracking-widest uppercase hover:underline md:text-base"
+			>
+				🚌 ¡INFORMACIÓN ACTUALIZADA SOBRE EL AUTOCAR! CLIC AQUÍ PARA VER MÁS DETALLES 🚌
+			</button>
+			<button
+				onclick={() => document.getElementById('transport')?.scrollIntoView({ behavior: 'smooth' })}
+				class="mx-4 flex items-center gap-2 text-sm font-bold tracking-widest uppercase hover:underline md:text-base"
+			>
+				🚌 ¡INFORMACIÓN ACTUALIZADA SOBRE EL AUTOCAR! CLIC AQUÍ PARA VER MÁS DETALLES 🚌
+			</button>
+			<button
+				onclick={() => document.getElementById('transport')?.scrollIntoView({ behavior: 'smooth' })}
+				class="mx-4 flex items-center gap-2 text-sm font-bold tracking-widest uppercase hover:underline md:text-base"
+			>
+				🚌 ¡INFORMACIÓN ACTUALIZADA SOBRE EL AUTOCAR! CLIC AQUÍ PARA VER MÁS DETALLES 🚌
+			</button>
+		</div>
+	</div>
+</div>
+
 <!-- Hero Section -->
 <section id="home" class="relative flex h-screen items-center justify-center overflow-hidden">
 	<enhanced:img
@@ -368,7 +400,14 @@
 			</div>
 
 			<div class="grid gap-8 md:grid-cols-2 lg:gap-12">
-				<div class="group flex">
+				<div class="group relative mt-4 flex md:mt-0">
+					<div class="absolute -top-5 -right-2 z-10 rotate-12 transform md:-top-6 md:-right-6">
+						<span
+							class="rounded-full border-2 border-[#212E21] bg-[#751F19] px-4 py-2 text-base font-black tracking-wider text-[#E8DEC9] shadow-md"
+						>
+							¡NUEVO!
+						</span>
+					</div>
 					<div
 						class="flex flex-1 transform flex-col rounded-lg border-2 border-[#212E21] bg-white/80 p-8 text-center transition-all duration-500 hover:-translate-y-1"
 					>
@@ -379,10 +418,41 @@
 						</div>
 						<h3 class="mb-4 text-2xl font-bold text-[#212E21] md:text-3xl">Autocar</h3>
 						<div class="flex-1 space-y-4 text-lg text-[#6A7B67]">
-							<p>📍 Desde Palma</p>
-							<p><strong>Salida:</strong> Próximamente</p>
-							<p><strong>Vuelta:</strong> Próximamente</p>
-							<p class="text-sm italic">Confirmanos si vienes con el autocar</p>
+							<div class="flex flex-col gap-2">
+								<p>📍 <strong>Punto de encuentro:</strong></p>
+								<p>Ferrocarril de Soller (Palma)</p>
+								<div class="flex flex-col gap-3 sm:flex-row">
+									<a
+										href="https://maps.app.goo.gl/KoNFgWm4h3zSeHPn9"
+										target="_blank"
+										rel="noopener noreferrer"
+										class="flex items-center justify-center gap-2 rounded-lg border-2 border-[#212E21] bg-[#751F19] px-4 py-3 text-sm font-bold text-[#E8DEC9] transition-all duration-300 hover:bg-[#212E21] sm:flex-1"
+									>
+										<img
+											src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg"
+											alt="Google"
+											class="h-5 w-5"
+										/>
+										Google Maps
+									</a>
+									<a
+										href="https://maps.apple/p/QZ5Nr.eIWJ~RMv"
+										target="_blank"
+										rel="noopener noreferrer"
+										class="flex items-center justify-center gap-2 rounded-lg border-2 border-[#212E21] bg-white px-4 py-3 text-sm font-bold text-[#212E21] transition-all duration-300 hover:bg-[#212E21] hover:text-[#E8DEC9] sm:flex-1"
+									>
+										<img
+											src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg"
+											alt="Apple"
+											class="h-5 w-5"
+										/>
+										Apple Maps
+									</a>
+								</div>
+							</div>
+							<p><strong>Salida:</strong> <strong>12:45pm</strong></p>
+							<p><strong>Vuelta:</strong> <strong>23:30pm</strong></p>
+							<p class="text-sm italic">Recomendamos llegar a las <strong>12:30pm</strong></p>
 						</div>
 					</div>
 				</div>
@@ -460,7 +530,13 @@
 		</div>
 
 		<div class="rounded-lg border-2 border-[#212E21] bg-white/80 p-8">
-			<form class="space-y-6" onsubmit={handlePhoneSubmit}>
+			<div class="text-center">
+				<p class="text-xl font-medium text-[#212E21]">
+					Gracias a todos por haber confirmado, si necesitas hacer algun cambio contacta con
+					nosotros por WhatsApp.
+				</p>
+			</div>
+			<!-- <form class="space-y-6" onsubmit={handlePhoneSubmit}>
 				<div>
 					<label for="phone" class="mb-2 block text-sm font-bold text-[#212E21]"
 						>Pon tu número de teléfono *</label
@@ -481,7 +557,7 @@
 				</div>
 
 				<Button type="submit" class="w-full">Continuar</Button>
-			</form>
+			</form> -->
 		</div>
 	</div>
 </Section>
@@ -502,5 +578,22 @@
 
 	.animate-fade-in {
 		animation: fade-in 1s ease-out;
+	}
+
+	@keyframes marquee {
+		0% {
+			transform: translateX(0);
+		}
+		100% {
+			transform: translateX(-50%);
+		}
+	}
+
+	.animate-marquee {
+		animation: marquee 20s linear infinite;
+	}
+
+	.animate-marquee:hover {
+		animation-play-state: paused;
 	}
 </style>

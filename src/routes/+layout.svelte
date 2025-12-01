@@ -59,9 +59,9 @@
 
 <header
 	bind:this={headerEl}
-	class="fixed top-0 right-0 left-0 z-50 transition-all duration-500 ease-out {scrollY > 50
-		? 'py-2'
-		: 'py-4'}"
+	class="fixed right-0 left-0 z-40 transition-all duration-500 ease-out {scrollY > 50
+		? 'top-0 py-2'
+		: 'top-12 py-4'}"
 >
 	<div class="mx-auto max-w-7xl px-4 md:px-6">
 		<nav
