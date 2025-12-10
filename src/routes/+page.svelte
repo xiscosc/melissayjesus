@@ -51,6 +51,19 @@
 	let iban = 'ES3701825319720208485582';
 	let copyButtonText = 'Copiar';
 
+	const marqueeItems = [
+		{
+			id: 'transport',
+			texto: 'Autocar: info actualizada, click aquí!',
+			icono: '🚌'
+		},
+		{
+			id: 'event',
+			texto: 'Guardarropa disponible!',
+			icono: '🧥'
+		}
+	];
+
 	async function copyIban() {
 		if (copyButtonText !== 'Copiar') return;
 
@@ -121,33 +134,21 @@
 </svelte:head>
 
 <!-- Announcement Banner -->
-<div class="relative z-50 bg-[#751F19] py-3 text-[#E8DEC9] shadow-md">
+<div class="relative z-50 bg-[#751F19] py-2 text-[#E8DEC9] shadow">
 	<div class="overflow-hidden">
-		<div class="animate-marquee flex whitespace-nowrap">
-			<button
-				onclick={() => document.getElementById('transport')?.scrollIntoView({ behavior: 'smooth' })}
-				class="mx-4 flex items-center gap-2 text-sm font-bold tracking-widest uppercase hover:underline md:text-base"
-			>
-				🚌 ¡INFORMACIÓN ACTUALIZADA SOBRE EL AUTOCAR! CLIC AQUÍ PARA VER MÁS DETALLES 🚌
-			</button>
-			<button
-				onclick={() => document.getElementById('transport')?.scrollIntoView({ behavior: 'smooth' })}
-				class="mx-4 flex items-center gap-2 text-sm font-bold tracking-widest uppercase hover:underline md:text-base"
-			>
-				🚌 ¡INFORMACIÓN ACTUALIZADA SOBRE EL AUTOCAR! CLIC AQUÍ PARA VER MÁS DETALLES 🚌
-			</button>
-			<button
-				onclick={() => document.getElementById('transport')?.scrollIntoView({ behavior: 'smooth' })}
-				class="mx-4 flex items-center gap-2 text-sm font-bold tracking-widest uppercase hover:underline md:text-base"
-			>
-				🚌 ¡INFORMACIÓN ACTUALIZADA SOBRE EL AUTOCAR! CLIC AQUÍ PARA VER MÁS DETALLES 🚌
-			</button>
-			<button
-				onclick={() => document.getElementById('transport')?.scrollIntoView({ behavior: 'smooth' })}
-				class="mx-4 flex items-center gap-2 text-sm font-bold tracking-widest uppercase hover:underline md:text-base"
-			>
-				🚌 ¡INFORMACIÓN ACTUALIZADA SOBRE EL AUTOCAR! CLIC AQUÍ PARA VER MÁS DETALLES 🚌
-			</button>
+		<div class="animate-marquee flex items-center gap-4 px-4 whitespace-nowrap">
+			{#each Array(3) as _, repeatIndex}
+				{#each marqueeItems as item, itemIndex}
+					<button
+						onclick={() => document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth' })}
+						class="flex items-center gap-2 rounded-full border border-[#E8DEC9]/40 bg-white/10 px-3 py-1.5 text-[11px] font-black tracking-[0.18em] uppercase transition-colors duration-200 hover:bg-white/20 md:text-xs"
+						aria-label={item.texto}
+					>
+						<span class="text-lg md:text-xl">{item.icono}</span>
+						<span class="text-left leading-tight">{item.texto}</span>
+					</button>
+				{/each}
+			{/each}
 		</div>
 	</div>
 </div>
@@ -235,6 +236,25 @@
 			<p class="mx-auto max-w-2xl text-xl font-light text-[#6A7B67]">
 				Toda la información importante
 			</p>
+			<div
+				class="mx-auto mt-6 flex max-w-xl items-center justify-center gap-3 rounded-xl border-2 border-[#212E21] bg-white/85 px-5 py-4 text-left shadow-[0_10px_35px_-20px_rgba(18,36,18,0.6)]"
+			>
+				<div
+					class="flex h-12 w-12 items-center justify-center rounded-full bg-[#751F19] text-2xl text-[#E8DEC9] shadow-md"
+				>
+					🧥
+				</div>
+				<div class="space-y-1">
+					<span
+						class="inline-flex rounded-full bg-[#751F19] px-3 py-1 text-[11px] font-black tracking-[0.16em] text-[#E8DEC9] uppercase shadow-sm"
+					>
+						¡Nuevo!
+					</span>
+					<p class="text-base font-semibold text-[#212E21]">
+						Habrá guardarropa para abrigos y zapatos de recambio.
+					</p>
+				</div>
+			</div>
 		</div>
 
 		<div class="mb-20 grid gap-8 md:grid-cols-3 lg:gap-12">
@@ -401,75 +421,212 @@
 
 			<div class="grid gap-8 md:grid-cols-2 lg:gap-12">
 				<div class="group relative mt-4 flex md:mt-0">
-					<div class="absolute -top-5 -right-2 z-10 rotate-12 transform md:-top-6 md:-right-6">
-						<span
-							class="rounded-full border-2 border-[#212E21] bg-[#751F19] px-4 py-2 text-base font-black tracking-wider text-[#E8DEC9] shadow-md"
-						>
-							¡NUEVO!
-						</span>
-					</div>
 					<div
-						class="flex flex-1 transform flex-col rounded-lg border-2 border-[#212E21] bg-white/80 p-8 text-center transition-all duration-500 hover:-translate-y-1"
+						class="flex flex-1 transform flex-col overflow-hidden rounded-xl border-2 border-[#212E21] bg-white/90 shadow-[0_18px_40px_-20px_rgba(18,36,18,0.4)] transition-all duration-500"
 					>
-						<div
-							class="mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-lg border-2 border-[#212E21] bg-[#751F19] text-4xl"
-						>
-							🚌
-						</div>
-						<h3 class="mb-4 text-2xl font-bold text-[#212E21] md:text-3xl">Autocar</h3>
-						<div class="flex-1 space-y-4 text-lg text-[#6A7B67]">
-							<div class="flex flex-col gap-2">
-								<p>📍 <strong>Punto de encuentro:</strong></p>
-								<p>Ferrocarril de Soller (Palma)</p>
-								<div class="flex flex-col gap-3 sm:flex-row">
-									<a
-										href="https://maps.app.goo.gl/KoNFgWm4h3zSeHPn9"
-										target="_blank"
-										rel="noopener noreferrer"
-										class="flex items-center justify-center gap-2 rounded-lg border-2 border-[#212E21] bg-[#751F19] px-4 py-3 text-sm font-bold text-[#E8DEC9] transition-all duration-300 hover:bg-[#212E21] sm:flex-1"
-									>
-										<img
-											src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg"
-											alt="Google"
-											class="h-5 w-5"
-										/>
-										Google Maps
-									</a>
-									<a
-										href="https://maps.apple/p/QZ5Nr.eIWJ~RMv"
-										target="_blank"
-										rel="noopener noreferrer"
-										class="flex items-center justify-center gap-2 rounded-lg border-2 border-[#212E21] bg-white px-4 py-3 text-sm font-bold text-[#212E21] transition-all duration-300 hover:bg-[#212E21] hover:text-[#E8DEC9] sm:flex-1"
-									>
-										<img
-											src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg"
-											alt="Apple"
-											class="h-5 w-5"
-										/>
-										Apple Maps
-									</a>
+						<div class="flex items-center justify-between bg-[#751F19] px-6 py-5 text-[#E8DEC9]">
+							<div class="flex items-center gap-4">
+								<div
+									class="flex h-14 w-14 items-center justify-center rounded-lg border-2 border-[#E8DEC9] bg-white/15 text-3xl"
+								>
+									🚌
+								</div>
+								<div class="text-left">
+									<p class="text-xs font-black tracking-[0.2em] uppercase">Transporte</p>
+									<h3 class="text-2xl leading-tight font-black text-white md:text-3xl">Autocar</h3>
 								</div>
 							</div>
-							<p><strong>Salida:</strong> <strong>12:45pm</strong></p>
-							<p><strong>Vuelta:</strong> <strong>23:30pm</strong></p>
-							<p class="text-sm italic">Recomendamos llegar a las <strong>12:30pm</strong></p>
+							<span
+								class="hidden rounded-full border border-[#E8DEC9]/40 bg-white/10 px-3 py-1 text-xs font-semibold tracking-[0.18em] text-[#E8DEC9]/90 uppercase md:inline-flex"
+							>
+								¡Nuevo!
+							</span>
+						</div>
+
+						<div class="space-y-6 p-6 text-left text-[#2f3b2f]">
+							<div
+								class="flex flex-col gap-4 rounded-lg border-2 border-[#212E21]/80 bg-white/80 p-4 sm:flex-row sm:items-center sm:justify-between"
+							>
+								<div class="flex items-center gap-3">
+									<div
+										class="flex h-11 w-11 items-center justify-center rounded-full bg-[#E8DEC9]/80 text-xl"
+									>
+										🏢
+									</div>
+									<div>
+										<p class="text-xs font-black tracking-[0.14em] text-[#6A7B67] uppercase">
+											Empresa de transporte
+										</p>
+										<p class="text-lg font-bold text-[#212E21]">Autocares Comas</p>
+									</div>
+								</div>
+								<div
+									class="flex items-center justify-center rounded-lg border-2 border-[#212E21] bg-white px-4 py-2"
+								>
+									<img
+										src="https://www.autocarescomas.com/imagenes/logo.png"
+										alt="Autocares Comas"
+										class="h-14 w-auto object-contain"
+									/>
+								</div>
+							</div>
+
+							<div class="grid gap-4 md:grid-cols-2">
+								<div
+									class="flex flex-col gap-3 rounded-lg border-2 border-[#212E21]/80 bg-white/85 p-4"
+								>
+									<div class="flex items-center gap-2">
+										<span class="text-xl">📍</span>
+										<div>
+											<p class="text-xs font-black tracking-[0.14em] text-[#6A7B67] uppercase">
+												Punto de encuentro
+											</p>
+											<p class="text-lg font-semibold text-[#212E21]">
+												Ferrocarril de Sóller (Palma)
+											</p>
+										</div>
+									</div>
+									<div class="flex flex-col gap-3 sm:flex-row">
+										<a
+											href="https://maps.app.goo.gl/KoNFgWm4h3zSeHPn9"
+											target="_blank"
+											rel="noopener noreferrer"
+											class="flex items-center justify-center gap-2 rounded-lg border-2 border-[#212E21] bg-[#751F19] px-4 py-3 text-sm font-bold text-[#E8DEC9] transition-all duration-300 hover:bg-[#212E21] sm:flex-1"
+										>
+											<img
+												src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg"
+												alt="Google"
+												class="h-5 w-5"
+											/>
+											Google Maps
+										</a>
+										<a
+											href="https://maps.apple/p/QZ5Nr.eIWJ~RMv"
+											target="_blank"
+											rel="noopener noreferrer"
+											class="flex items-center justify-center gap-2 rounded-lg border-2 border-[#212E21] bg-white px-4 py-3 text-sm font-bold text-[#212E21] transition-all duration-300 hover:bg-[#212E21] hover:text-[#E8DEC9] sm:flex-1"
+										>
+											<img
+												src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg"
+												alt="Apple"
+												class="h-5 w-5"
+											/>
+											Apple Maps
+										</a>
+									</div>
+								</div>
+
+								<div
+									class="flex flex-col gap-3 rounded-lg border-2 border-[#212E21]/80 bg-[#E8DEC9]/80 p-4 text-[#212E21]"
+								>
+									<div class="flex items-center gap-2 text-lg font-bold">
+										<span>⏰</span>
+										<p>Horarios</p>
+									</div>
+									<div class="grid grid-cols-2 gap-3 text-sm font-semibold md:text-base">
+										<div
+											class="rounded-lg border border-[#212E21]/40 bg-white/70 px-3 py-2 text-center"
+										>
+											Salida<br /><span class="text-lg font-black">12:45</span>
+										</div>
+										<div
+											class="rounded-lg border border-[#212E21]/40 bg-white/70 px-3 py-2 text-center"
+										>
+											Vuelta<br /><span class="text-lg font-black">23:30</span>
+										</div>
+									</div>
+									<p class="text-sm text-[#4d5a4d]">
+										Recomendamos llegar a las <strong>12:30</strong>.
+									</p>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 
 				<div class="group flex">
 					<div
-						class="flex flex-1 transform flex-col rounded-lg border-2 border-[#212E21] bg-white/80 p-8 text-center transition-all duration-500 hover:-translate-y-1"
+						class="flex flex-1 transform flex-col overflow-hidden rounded-xl border-2 border-[#212E21] bg-white/90 shadow-[0_18px_40px_-20px_rgba(18,36,18,0.4)] transition-all duration-500"
 					>
-						<div
-							class="mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-lg border-2 border-[#212E21] bg-[#751F19] text-4xl"
-						>
-							🚙
+						<div class="flex items-center justify-between bg-[#751F19] px-6 py-5 text-[#E8DEC9]">
+							<div class="flex items-center gap-4">
+								<div
+									class="flex h-14 w-14 items-center justify-center rounded-lg border-2 border-[#E8DEC9] bg-white/15 text-3xl"
+								>
+									🚙
+								</div>
+								<div class="text-left">
+									<p class="text-xs font-black tracking-[0.2em] uppercase">Transporte</p>
+									<h3 class="text-2xl leading-tight font-black text-white md:text-3xl">Coche</h3>
+								</div>
+							</div>
+							<span
+								class="hidden rounded-full border border-[#E8DEC9]/40 bg-white/10 px-3 py-1 text-xs font-semibold tracking-[0.18em] text-[#E8DEC9]/90 uppercase md:inline-flex"
+							>
+								Párking gratis
+							</span>
 						</div>
-						<h3 class="mb-4 text-2xl font-bold text-[#212E21] md:text-3xl">Coche</h3>
-						<div class="flex-1 space-y-4 text-lg text-[#6A7B67]">
-							<p>🅿️ Párking</p>
-							<p>Bodegas Suau ofrece párking para todos los asistentes</p>
+
+						<div class="space-y-6 p-6 text-left text-[#2f3b2f]">
+							<div
+								class="flex items-center gap-3 rounded-lg border-2 border-[#212E21]/80 bg-white/85 p-4"
+							>
+								<div
+									class="flex h-11 w-11 items-center justify-center rounded-full bg-[#E8DEC9]/80 text-xl"
+								>
+									🅿️
+								</div>
+								<div>
+									<p class="text-xs font-black tracking-[0.14em] text-[#6A7B67] uppercase">
+										Párking en la bodega
+									</p>
+									<p class="text-lg font-semibold text-[#212E21]">
+										Disponible para todos los asistentes.
+									</p>
+								</div>
+							</div>
+
+							<div class="grid gap-4">
+								<div
+									class="flex flex-col gap-3 rounded-lg border-2 border-[#212E21]/80 bg-white/85 p-4"
+								>
+									<div class="flex items-center gap-2 text-lg font-bold">
+										<span>📍</span>
+										<p>Ubicación</p>
+									</div>
+									<p class="text-sm font-semibold text-[#212E21]">
+										Camí Cabana, 12, 07141 Es Pont d'Inca
+									</p>
+									<div class="flex flex-col gap-3 sm:flex-row">
+										<a
+											href="https://maps.app.goo.gl/yKYQKyTRgUFYWCKSA"
+											target="_blank"
+											rel="noopener noreferrer"
+											class="flex items-center justify-center gap-2 rounded-lg border-2 border-[#212E21] bg-[#751F19] px-4 py-3 text-sm font-bold text-[#E8DEC9] transition-all duration-300 hover:bg-[#212E21] sm:flex-1"
+										>
+											<img
+												src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg"
+												alt="Google"
+												class="h-5 w-5"
+											/>
+											Google Maps
+										</a>
+										<a
+											href="https://maps.apple.com/place?address=Camí de la sa Cabana, 12, 07141 Marratxí, Balearic Isles, Spain&coordinate=39.598906,2.692305&name=Bodegas Suau&place-id=I2347CB6131BD7B1C&map=explore"
+											target="_blank"
+											rel="noopener noreferrer"
+											class="flex items-center justify-center gap-2 rounded-lg border-2 border-[#212E21] bg-white px-4 py-3 text-sm font-bold text-[#212E21] transition-all duration-300 hover:bg-[#212E21] hover:text-[#E8DEC9] sm:flex-1"
+										>
+											<img
+												src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg"
+												alt="Apple"
+												class="h-5 w-5"
+											/>
+											Apple Maps
+										</a>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
