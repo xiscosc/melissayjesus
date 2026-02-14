@@ -4,7 +4,7 @@
 		<div class="mx-auto max-w-4xl">
 			<p class="mb-2 text-xs text-[#E8DEC9]/70">Chaotically vibe-coded with ❤️ by xiscosc</p>
 			<a
-				href="https://github.com/xiscosc"
+				href="https://xiscosc.codes"
 				target="_blank"
 				rel="noopener noreferrer"
 				class="inline-flex items-center gap-1 text-xs text-[#E8DEC9]/70 transition-colors duration-200 hover:text-[#E8DEC9]"
